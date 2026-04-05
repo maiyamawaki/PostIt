@@ -68,7 +68,7 @@ public class PostItService {
 		return getAllPostItByUpdTime();
 	}
 
-	public List<PostItDto> markPostItDtos(Long postId) {
+	public List<PostItDto> deletePostIt(Long postId) {
 		PostIt post = findPostItByPostItId(postId);
 
 		postRepo.deleteById(postId);
