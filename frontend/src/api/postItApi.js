@@ -7,7 +7,9 @@ export const fetchPostIt = async () => {
 		throw new Error("PostItApi failed");
 	}
 
-	return response.json();
+	const postItData = await response.json();
+
+	return postItData;
 }
 
 export const createPostIt = async(postItTitle, postItContents) => {

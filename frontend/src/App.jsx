@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
-import PostItList from "./pages/PostItList"
+import PostItLiist from "./components/PostItLiist"
 import './App.css'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/postit"/>} />
-        <Route path="/postit" element={<PostItList />} />
+        <Route path="/postit" element={<PostItLiist />} />
       </Routes>
     </BrowserRouter>
   )
