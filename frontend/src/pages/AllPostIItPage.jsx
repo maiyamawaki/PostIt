@@ -12,12 +12,11 @@ const AllPostItPage = () => {
 	return (
 		<div>
 			<h1>HAZLOS</h1>
+			<a href="/add">ADD</a>
 			<div className="postItContainer">
-				<div className="postIt">
-					{postIts.map((post) => {
-						<PostItComponent key={post.postId} post={post} />
-					})}
-				</div>
+				{postIts.map((post) => {
+					return <PostItComponent key={post.postId} post={post} />
+				})}
 			</div>
 		</div>
 	)

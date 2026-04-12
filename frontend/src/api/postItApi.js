@@ -13,7 +13,7 @@ export const fetchPostIt = async () => {
 }
 
 export const createPostIt = async(postItTitle, postItContents) => {
-	const response = await fetch(`${BASE_URL}/`,{
+	const response = await fetch(BASE_URL,{
 		method : "POST",
 		headers : {"Content-type" : "application/json"},
 		body : JSON.stringify({postItTitle, postItContents}),

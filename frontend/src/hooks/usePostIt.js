@@ -10,6 +10,7 @@ export const usePostIt = () => {
 			try {
 				const postItData = await fetchPostIt();
 				setPostIts(postItData);
+				console.log(postItData);
 			} catch (err) { 
 				setError(err);
 			} finally {
@@ -24,7 +25,11 @@ export const usePostIt = () => {
 
 export const useCreatePostIt = () => {
 	const handleCreate = async (postItTitle, postItContents) => {
-		await createPostIt(postItTitle, postItContents);
+		try {
+			await createPostIt(postItTitle, postItContents);
+		} catch(err) {
+			console.log(err);
+		}
 	}
 	return {handleCreate};
 }

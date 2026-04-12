@@ -1,12 +1,12 @@
 import React from "react";
 
-const PostItComponent = ({postIt}) => {
+const PostItComponent = ({post}) => {
 	return (
-		<li>
-			<h2>{postIt.postItTitle}</h2>
-			<p>{postIt.updTime}</p>
-			<p>{postIt.postItContents}</p>
-		</li>
+		<div className="postIt">
+			<h3>{post.postItTitle}</h3>
+			<p>{post.updTime}</p>
+			<p>{post.postItContents}</p>
+		</div>
 	)
 }
 
