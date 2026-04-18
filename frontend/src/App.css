@@ -2,9 +2,22 @@
   margin: 0;
 }
 
+.main {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: lightcyan;
+}
+
 .postItContainer {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 80%;
   margin: 10px auto;
 }
@@ -12,9 +25,11 @@
   background-color: tomato;
   margin: 10px;
   width: 300px;
+  height: 150px;
 }
 
-.registerPostIt {
+.registerPostIt,
+.updatePostIt {
   width: 300px;
   margin: 20px auto;
   background-color: lightgreen;

@@ -2,6 +2,7 @@ package com.joy.backend.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,8 +35,9 @@ public class PostItController {
 		return postService.createPostIt(postItDto);
 	}
 
-	@PostMapping("/{postId}")
+	@PutMapping("/{postId}")
 	public List<PostItDto> updatePostIt(@PathVariable Long postId, @RequestBody PostItDto postItDto) {
+		postItDto.setPostId(postId);
 		return postService.updatePostIt(postItDto);
 	}
 

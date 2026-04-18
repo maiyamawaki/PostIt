@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchPostIt, createPostIt} from "../api/postItApi";
+import { fetchAllPostIt, createPostIt, updatePostIt} from "../api/postItApi";
 
 export const usePostIt = () => {
 	const [postIts, setPostIts] = useState([]);
@@ -8,9 +8,8 @@ export const usePostIt = () => {
 	useEffect(()=> {
 		const getPostIts = async () => {
 			try {
-				const postItData = await fetchPostIt();
+				const postItData = await fetchAllPostIt();
 				setPostIts(postItData);
-				console.log(postItData);
 			} catch (err) { 
 				setError(err);
 			} finally {
@@ -19,7 +18,6 @@ export const usePostIt = () => {
 		};
 		getPostIts();
 	}, []);
-
 	return {postIts, error};
 }
 
@@ -32,4 +30,16 @@ export const useCreatePostIt = () => {
 		}
 	}
 	return {handleCreate};
+}
+
+export const useUpdatePostIt = (postId) => {
+
+	const handleUpdate = async(postItTitle, postItContents) => {
+		try {
+			await updatePostIt(postId, postItTitle, postItContents);
+		} catch(err) {
+			console.log(err);
+		}
+	}
+	return {handleUpdate};
 }

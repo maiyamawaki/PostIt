@@ -1,19 +1,20 @@
+import { useNavigate, useParams } from "react-router-dom";
+import {useUpdatePostIt} from "../hooks/usePostIt";
 import { useState } from "react";
-import { useCreatePostIt } from "../hooks/usePostIt";
-import { useNavigate } from "react-router-dom";
 import HeaderComponent from "../components/HeaderComponent" 
 
-const RegisterPostIt = () => {
-	const {handleCreate} = useCreatePostIt();
+const UpdatePostIt = () => {
 	const navigate = useNavigate();
+	const {postId} = useParams();
+	const {handleUpdate} = useUpdatePostIt(postId);
 
-	 const [postItTitle,setPostItTitle] = useState("");
-	 const [postItContents,setPostItContents] = useState("");
+	const [postItTitle, setPostItTitle] = useState("");
+	const [postItContents, setPostItContents] = useState("");
 
-	 const handleSubmit = async(e) => {
+	const handleSubmit = async(e) => {
 		e.preventDefault();
 		try {
-			await handleCreate(postItTitle, postItContents);
+			await handleUpdate(postItTitle, postItContents);
 			setPostItTitle("");
 			setPostItContents("");
 			navigate("/");
@@ -24,9 +25,9 @@ const RegisterPostIt = () => {
 
 	return (
 		<div className="main">
-			<div className="registerPostIt">
+			<div className="updatePostIt">
 				<HeaderComponent />
-				<h2>NEW POSTIT</h2>
+				<h2>UPDATE POSTIT</h2>
 				<form onSubmit={handleSubmit}>
 					<div className="postItTitle">
 						<label>TITLE : </label>
@@ -43,11 +44,12 @@ const RegisterPostIt = () => {
 							onChange={(e) => setPostItContents(e.target.value)}
 						/>
 					</div>
-					<button type="submit">Create PostIt</button>
+					<button type="submit">Update PostIt</button>
 				</form>
 			</div>
 		</div>
 	)
+
 }
 
-export default RegisterPostIt;
+export default UpdatePostIt;

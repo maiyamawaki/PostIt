@@ -1,6 +1,7 @@
 import React from "react";
 import { usePostIt } from "../hooks/usePostIt";
 import PostItComponent from "../components/PostItComponent";
+import HeaderComponent from "../components/HeaderComponent" 
 
 const AllPostItPage = () => {
 	const{postIts, error} = usePostIt();
@@ -10,7 +11,8 @@ const AllPostItPage = () => {
 	}
 
 	return (
-		<div>
+		<div className="main">
+			<HeaderComponent />
 			<h1>HAZLOS</h1>
 			<a href="/add">ADD</a>
 			<div className="postItContainer">
