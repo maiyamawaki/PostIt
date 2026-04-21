@@ -1,10 +1,20 @@
 import React from "react";
 import { usePostIt } from "../hooks/usePostIt";
+import { deletePostIt } from "../api/postItApi";
 import PostItComponent from "../components/PostItComponent";
 import HeaderComponent from "../components/HeaderComponent" 
 
 const AllPostItPage = () => {
-	const{postIts, error} = usePostIt();
+	const{postIts, error, refetch} = usePostIt();
+
+	const handleDelete = async(postId) => {
+		try {
+			await deletePostIt(postId);
+			refetch();
+		} catch(err) {
+			console.log(err);
+		}
+	};
 
 	if(error) {
 		return (<p>Algo esta mal</p>);
@@ -17,7 +27,11 @@ const AllPostItPage = () => {
 			<a href="/add">ADD</a>
 			<div className="postItContainer">
 				{postIts.map((post) => {
-					return <PostItComponent key={post.postId} post={post} />
+					return <PostItComponent 
+						key={post.postId} 
+						post={post}
+						onDelete={()=>handleDelete(post.postId)}
+						/>
 				})}
 			</div>
 		</div>

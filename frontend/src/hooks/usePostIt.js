@@ -5,21 +5,21 @@ export const usePostIt = () => {
 	const [postIts, setPostIts] = useState([]);
 	const [error, setError] = useState(null);
 
+	const getPostIts = async () => {
+		try {
+			const postItData = await fetchAllPostIt();
+			setPostIts(postItData);
+		} catch (err) { 
+			setError(err);
+		} finally {
+			console.log("success");
+		}
+	}
 	useEffect(()=> {
-		const getPostIts = async () => {
-			try {
-				const postItData = await fetchAllPostIt();
-				setPostIts(postItData);
-			} catch (err) { 
-				setError(err);
-			} finally {
-				console.log("success");
-			}
-		};
 		getPostIts();
 	}, []);
-	return {postIts, error};
-}
+	return {postIts, error, refetch : getPostIts};
+};
 
 export const useCreatePostIt = () => {
 	const handleCreate = async (postItTitle, postItContents) => {

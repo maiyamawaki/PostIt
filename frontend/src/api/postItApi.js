@@ -53,3 +53,17 @@ export const updatePostIt = async(postId, postItTitle, postItContents) => {
 
 	return response.json();
 }
+
+export const deletePostIt = async(postId) => {
+	const numericPostId = Number(postId);
+	console.log("numericPostId : " + numericPostId);	
+ 	const response = await fetch(`${BASE_URL}/${numericPostId}`,{
+		method : "PATCH",
+	});
+
+	if(!response.ok) {
+		throw new Error("Delete PostIt function failed");
+	}
+
+	return response.json();
+}
