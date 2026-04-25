@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/postit"/>} />
         <Route path="/postit" element={<AllPostIItPage />} />
-        <Route path="/add" element={<RegisterPostIt />} />
+        <Route path="/postit/register" element={<RegisterPostIt />} />
         <Route path="/postit/:postId" element={<UpdatePostIt />} />
       </Routes>
     </BrowserRouter>

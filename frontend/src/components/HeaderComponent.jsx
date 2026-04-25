@@ -4,7 +4,7 @@ const HeaderComponent = () => {
 	return (
 		<div className="header">
 			<Link to={"/"}>Home</Link>
-			<Link to={"/postit/new"}>New PostIt</Link>
+			<Link to={"/postit/register"}>New PostIt</Link>
 		</div>
 	)
 }

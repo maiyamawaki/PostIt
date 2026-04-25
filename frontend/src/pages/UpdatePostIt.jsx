@@ -25,8 +25,8 @@ const UpdatePostIt = () => {
 
 	return (
 		<div className="main">
+			<HeaderComponent />
 			<div className="updatePostIt">
-				<HeaderComponent />
 				<h2>UPDATE POSTIT</h2>
 				<form onSubmit={handleSubmit}>
 					<div className="postItTitle">

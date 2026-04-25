@@ -27,11 +27,13 @@ public class PostItController {
 
 	@GetMapping
 	public List<PostItDto> getAllPostItByUpdTime() {
+		System.out.println("test");
 		return postService.getAllPostItByUpdTime();
 	}
 
 	@PostMapping
 	public List<PostItDto> createPostIt(@RequestBody PostItDto postItDto) {
+		System.out.println("createPostIt called with title: " + postItDto.getPostItTitle() + ", contents: " + postItDto.getPostItContents());
 		return postService.createPostIt(postItDto);
 	}
 
@@ -43,6 +45,7 @@ public class PostItController {
 
 	@PatchMapping("/{postId}")
 	public List<PostItDto> markPostItAsDelete(@PathVariable Long postId) {
+		System.out.println("markPostItAsDelete called with postId: " + postId);
 		return postService.markPostIdAsDeleted(postId);
 	}
 

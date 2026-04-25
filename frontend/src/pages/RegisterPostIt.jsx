@@ -10,7 +10,7 @@ const RegisterPostIt = () => {
 	 const [postItTitle,setPostItTitle] = useState("");
 	 const [postItContents,setPostItContents] = useState("");
 
-	 const handleSubmit = async(e) => {
+	 const handleRegisterSubmit = async(e) => {
 		e.preventDefault();
 		try {
 			await handleCreate(postItTitle, postItContents);
@@ -24,10 +24,10 @@ const RegisterPostIt = () => {
 
 	return (
 		<div className="main">
+			<HeaderComponent />
 			<div className="registerPostIt">
-				<HeaderComponent />
 				<h2>NEW POSTIT</h2>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleRegisterSubmit}>
 					<div className="postItTitle">
 						<label>TITLE : </label>
 						<input

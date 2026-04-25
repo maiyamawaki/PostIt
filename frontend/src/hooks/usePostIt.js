@@ -24,6 +24,7 @@ export const usePostIt = () => {
 export const useCreatePostIt = () => {
 	const handleCreate = async (postItTitle, postItContents) => {
 		try {
+			console.log("funcionando");
 			await createPostIt(postItTitle, postItContents);
 		} catch(err) {
 			console.log(err);

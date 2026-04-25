@@ -23,8 +23,7 @@ const AllPostItPage = () => {
 	return (
 		<div className="main">
 			<HeaderComponent />
-			<h1>HAZLOS</h1>
-			<a href="/add">ADD</a>
+			<h1>postit</h1>
 			<div className="postItContainer">
 				{postIts.map((post) => {
 					return <PostItComponent 
