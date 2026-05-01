@@ -16,7 +16,7 @@ const RegisterPostIt = () => {
 			await handleCreate(postItTitle, postItContents);
 			setPostItTitle("");
 			setPostItContents("");
-			navigate("/");
+			navigate("/postit");
 		} catch (err) {
 			console.log(err);
 		}

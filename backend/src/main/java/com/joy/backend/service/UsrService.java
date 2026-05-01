@@ -9,7 +9,6 @@ import com.joy.backend.repository.UsrRepository;
 import com.joy.backend.entity.Usr;
 import com.joy.backend.dto.UsrDto;
 
-
 @Service
 public class UsrService {
 	
@@ -21,6 +20,7 @@ public class UsrService {
 
 	private UsrDto toDto(Usr usr) {
 		UsrDto dto = new UsrDto(usr.getUserId(),
+														usr.getEmail(),
 														usr.getUserName(),
 														usr.getPassword());
 		return dto;
@@ -40,11 +40,20 @@ public class UsrService {
 		return usr;
 	}
 
+	public UsrDto findByEmailAndPassword(String email, String password) {
+		Usr usr = usrRepository.findByEmailAndPassword(email, password);
+		if(usr != null) {
+			return toDto(usr);
+		}
+		return null;
+	}
+
 	public UsrDto createUsr(UsrDto usrDto) {
 		Usr existUser = findUsrByUserName(usrDto.getUserName());
 		Usr newUsr = null;
 		if(existUser == null) {
 			newUsr = new Usr(usrDto.getUserName(),
+												usrDto.getEmail(),
 												usrDto.getPassword());
 			usrRepository.save(newUsr);
 			return toDto(newUsr);
@@ -57,6 +66,7 @@ public class UsrService {
 		Usr existUser = findUsrByUserName(usrDto.getUserName());
 		if(existUser != null) {
 			existUser.setUserName(usrDto.getUserName());
+			existUser.setEmail(usrDto.getEmail());
 			existUser.setPassword(usrDto.getPassword());
 			usrRepository.save(existUser);
 			return toDto(existUser);

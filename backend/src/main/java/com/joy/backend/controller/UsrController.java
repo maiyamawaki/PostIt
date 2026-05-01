@@ -22,13 +22,7 @@ public class UsrController {
 
 	public UsrController(UsrService usrService) {
 		this.usrService = usrService;
-	}	
-
-	@GetMapping
-	public List<UsrDto> getUser() {
-		System.out.println("a vaar");
-		return usrService.findAllUsers();
-	} 
+	}
 
 	@PostMapping
 	public UsrDto createUser(@RequestBody UsrDto usrDto) {

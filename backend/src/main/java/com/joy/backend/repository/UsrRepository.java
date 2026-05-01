@@ -9,4 +9,6 @@ public interface UsrRepository extends JpaRepository<Usr, Long>{
 	// find by userName
 	Usr findByUserName(String userName);
 	
+	public Usr findByEmailAndPassword(String email, String password);
+
 }

@@ -14,12 +14,15 @@ public class Usr {
 
 	private String userName;
 
+	private String email;
+
 	private String password;
 
 	public Usr() {}
 
-	public Usr(String userName, String password) {
+	public Usr(String userName, String email, String password) {
 		this.userName = userName;
+		this.email = email;
 		this.password = password;
 	}
 
@@ -33,6 +36,14 @@ public class Usr {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
