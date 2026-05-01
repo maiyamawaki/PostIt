@@ -24,17 +24,10 @@ public class UsrController {
 		this.usrService = usrService;
 	}
 
-	@PostMapping
-	public UsrDto createUser(@RequestBody UsrDto usrDto) {
-		return usrService.createUsr(usrDto);
-	} 
-
 	@PutMapping("/{userId}")
 	public UsrDto updateUsr(@PathVariable Long userId, @RequestBody UsrDto usrDto) {
 		usrService.updateUsr(usrDto);
 		return usrDto;
 	}
-
-	
-
+  
 }

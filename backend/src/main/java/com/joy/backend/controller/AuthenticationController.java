@@ -1,31 +1,31 @@
 package com.joy.backend.controller;
 
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.Map;
 
 import com.joy.backend.service.UsrService;
 import com.joy.backend.dto.UsrDto;
 import com.joy.backend.dto.LoginRequest;
+import com.joy.backend.dto.RegisterRequest;
 
 @RestController
 @RequestMapping("/api/auth")
-public class LoginController {
+public class AuthenticationController {
 	
 	private UsrService usrService;
 
-	public LoginController(UsrService usrService) {
+	public AuthenticationController(UsrService usrService) {
 		this.usrService = usrService;
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-		System.out.println("test");
 		UsrDto usrDto = usrService.findByEmailAndPassword(
 																	loginRequest.getEmail(), 
 																	loginRequest.getPassword());
@@ -36,5 +36,15 @@ public class LoginController {
 			return ResponseEntity.ok(usrDto);
 		}
 	}
-	
+
+	@PostMapping("/registerUsr")
+	public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
+		UsrDto usrDto = usrService.createUsr(registerRequest);
+		if(usrDto != null) {
+			return ResponseEntity.ok(usrDto);
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+															.body(Map.of("message", "Invalid user information"));
+		}
+	}
 }

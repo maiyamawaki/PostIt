@@ -7,6 +7,8 @@ import HeaderComponent from "../components/HeaderComponent"
 const AllPostItPage = () => {
 	const{postIts, error, refetch} = usePostIt();
 
+	console.log("aqui eey");
+
 	const handleDelete = async(postId) => {
 		try {
 			await deletePostIt(postId);

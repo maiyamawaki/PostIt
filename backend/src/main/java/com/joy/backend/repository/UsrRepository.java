@@ -6,9 +6,11 @@ import com.joy.backend.entity.Usr;
 
 public interface UsrRepository extends JpaRepository<Usr, Long>{
 	
-	// find by userName
-	Usr findByUserName(String userName);
+	public Usr findByUserName(String userName);
 	
+	public Usr findByEmail(String email);
+
 	public Usr findByEmailAndPassword(String email, String password);
+
 
 }

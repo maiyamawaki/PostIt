@@ -1,15 +1,26 @@
 package com.joy.backend.dto;
 
-public class LoginRequest {
+public class RegisterRequest {
+	private String userName;
+
 	private String email;
-	
+
 	private String password;
 
-	public LoginRequest() {}
+	public RegisterRequest() {}
 
-	public LoginRequest(String email, String password) {
+	public RegisterRequest(String username, String email, String password) {
+		this.userName = username;
 		this.email = email;
 		this.password = password;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getEmail() {

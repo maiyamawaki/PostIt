@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.joy.backend.repository.UsrRepository;
 import com.joy.backend.entity.Usr;
 import com.joy.backend.dto.UsrDto;
+import com.joy.backend.dto.RegisterRequest;
 
 @Service
 public class UsrService {
@@ -40,6 +41,11 @@ public class UsrService {
 		return usr;
 	}
 
+	private Usr findUsrByEmail(String email) {
+		Usr usr = usrRepository.findByEmail(email);
+		return usr;
+	}
+
 	public UsrDto findByEmailAndPassword(String email, String password) {
 		Usr usr = usrRepository.findByEmailAndPassword(email, password);
 		if(usr != null) {
@@ -48,17 +54,17 @@ public class UsrService {
 		return null;
 	}
 
-	public UsrDto createUsr(UsrDto usrDto) {
-		Usr existUser = findUsrByUserName(usrDto.getUserName());
+	public UsrDto createUsr(RegisterRequest registerRequest) {
+		Usr existUser = findUsrByEmail(registerRequest.getEmail());
 		Usr newUsr = null;
 		if(existUser == null) {
-			newUsr = new Usr(usrDto.getUserName(),
-												usrDto.getEmail(),
-												usrDto.getPassword());
+			newUsr = new Usr(registerRequest.getUserName(),
+												registerRequest.getEmail(),
+												registerRequest.getPassword());
 			usrRepository.save(newUsr);
-			return toDto(newUsr);
+			return toDto(newUsr);		
 		} else {
-			throw new RuntimeException("User already exists");
+			return null;
 		}
 	}
 

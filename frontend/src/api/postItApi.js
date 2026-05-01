@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:8080/postit";
 
 export const fetchAllPostIt = async () => {
 	const response = await fetch(`${BASE_URL}`);
-
+	console.log("aquiiii");
 	if(!response.ok) {
 		throw new Error("PostItApi failed");
 	}

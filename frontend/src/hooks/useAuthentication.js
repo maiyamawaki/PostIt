@@ -1,9 +1,8 @@
-import { login } from "../api/loginApi";
+import { login, registerUsr } from "../api/authenticationApi";
 
 export const useLogin = () => {
 	const handleLogin = async(email, password) => {
 		try{
-			console.log("test200");
 			await login(email, password);
 		} catch(err) {
 			console.log(err);
@@ -11,4 +10,16 @@ export const useLogin = () => {
 		}
 	}
 	return {handleLogin};
+}
+
+export const useRegisterUsr = () => {
+	const handleRegisterUsr = async(userName, email, password) => {
+		try {
+			await registerUsr(userName,email,password);
+		} catch (err) {
+			console.log(err);
+			throw err;
+		}
+	}
+	return {handleRegisterUsr}
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useAuthentication";
 import { useNavigate } from "react-router-dom";
+import HeaderComponent from "../components/HeaderComponent" 
 
 const LoginPage = () => {
 	const {handleLogin} = useLogin();
@@ -25,6 +26,7 @@ const LoginPage = () => {
 
 	return (
 		<div className="main">
+			<HeaderComponent />
 			{error && <p style={{ color: "red" }}>{error}</p>}
 			<div className="loginPage">
 				<h2>LOGIN</h2>
