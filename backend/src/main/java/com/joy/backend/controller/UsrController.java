@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.joy.backend.dto.UsrDto;
-import com.joy.backend.service.UsrService;
+import com.joy.backend.service.AuthenticationService;
 
 @Controller
 @RequestMapping("/usr")
 public class UsrController {
 
-	private UsrService usrService;
+	private AuthenticationService usrService;
 
-	public UsrController(UsrService usrService) {
+	public UsrController(AuthenticationService usrService) {
 		this.usrService = usrService;
 	}
 

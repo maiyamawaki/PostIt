@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.joy.backend.service.UsrService;
+import com.joy.backend.service.AuthenticationService;
 import com.joy.backend.dto.UsrDto;
 import com.joy.backend.dto.LoginRequest;
 import com.joy.backend.dto.RegisterRequest;
@@ -18,17 +18,15 @@ import com.joy.backend.dto.RegisterRequest;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
 	
-	private UsrService usrService;
+	private AuthenticationService usrService;
 
-	public AuthenticationController(UsrService usrService) {
+	public AuthenticationController(AuthenticationService usrService) {
 		this.usrService = usrService;
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-		UsrDto usrDto = usrService.findByEmailAndPassword(
-																	loginRequest.getEmail(), 
-																	loginRequest.getPassword());
+		UsrDto usrDto = usrService.loginByEmail(loginRequest);
 		if(usrDto == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 													 	.body(Map.of("message", "Invalid email or password"));
