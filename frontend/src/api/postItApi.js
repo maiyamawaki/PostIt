@@ -1,8 +1,11 @@
 const BASE_URL = "http://localhost:8080/postit";
 
 export const fetchAllPostIt = async () => {
-	const response = await fetch(`${BASE_URL}`);
-	console.log("aquiiii");
+	const response = await fetch(`${BASE_URL}`, {
+		method : "GET",
+		credentials: "include"
+	});
+
 	if(!response.ok) {
 		throw new Error("PostItApi failed");
 	}
@@ -13,7 +16,10 @@ export const fetchAllPostIt = async () => {
 }
 
 export const fetchPostIt = async(postId) => {
-	const response = await fetch(`${BASE_URL}/${postId}`);
+	const response = await fetch(`${BASE_URL}/${postId}`,{
+		method : "GET",
+		credentials: "include"
+	});
 
 	if(!response.ok) {
 		throw new Error("PostItApi failed");

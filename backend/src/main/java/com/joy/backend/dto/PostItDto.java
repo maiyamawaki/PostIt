@@ -32,7 +32,7 @@ public class PostItDto {
 	public void setPostId(Long postId) {
 		this.postId = postId;
 	}
-
+	
 	public String getPostItTitle() {
 		return postItTitle;
 	}

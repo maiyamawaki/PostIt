@@ -6,16 +6,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.joy.backend.repository.PostItRepository;
+import com.joy.backend.repository.UsrRepository;
 import com.joy.backend.entity.PostIt;
+import com.joy.backend.entity.Usr;
 import com.joy.backend.dto.PostItDto;
 
 @Service
 public class PostItService {
 	
 	private PostItRepository postRepo;
+	private UsrRepository usrRepo;
 
-	public PostItService(PostItRepository postRepo) {
+	public PostItService(PostItRepository postRepo, UsrRepository usrRepo) {
 		this.postRepo = postRepo;
+		this.usrRepo = usrRepo;
 	}
 
 	private PostItDto toDto(PostIt postIt) {
@@ -27,53 +31,54 @@ public class PostItService {
 		return dto;
 	}
 
-	private PostIt findPostItByPostItId(Long postId) {
-		PostIt post = postRepo.findById(postId).orElseThrow(()->new RuntimeException("PostIt not found"));
+	private PostIt findPostItByPostItId(Long postId, Long userId) {
+		PostIt post = postRepo.findByPostIdAndUsr_UserId(postId, userId);
 		return post;
 	}
 
-	public List<PostItDto> getAllPostItByUpdTime() {
-		List<PostItDto> postList = postRepo.findAllByDelFlgFalseOrderByUpdTimeDesc()
+	public List<PostItDto> getAllPostItByUserIdAndUpdTime(Long userId) {
+		List<PostItDto> postList = postRepo.findAllByUsr_UserIdAndDelFlgFalseOrderByUpdTimeDesc(userId)
 																		.stream()
 																		.map(postit->toDto(postit))
 																		.collect(Collectors.toList());
 		return postList;
 	}
 
-	public List<PostItDto> createPostIt(PostItDto postItDto) {
-		PostIt post = new PostIt(postItDto.getPostItTitle(), 
+	public List<PostItDto> createPostIt(PostItDto postItDto, Long userId) {
+		Usr usr = usrRepo.findByUserId(userId);
+
+		PostIt post = new PostIt(usr,
+														postItDto.getPostItTitle(), 
 														postItDto.getPostItContents());
 		postRepo.save(post);
 
-		return getAllPostItByUpdTime();
+		return getAllPostItByUserIdAndUpdTime(userId);
 	}
 
-	public List<PostItDto> updatePostIt(PostItDto postItDto) {
-		PostIt post = findPostItByPostItId(postItDto.getPostId());
+	public List<PostItDto> updatePostIt(PostItDto postItDto, Long userId) {
+		PostIt post = findPostItByPostItId(postItDto.getPostId(), 
+																				userId);
 
 		post.setPostItTitle(postItDto.getPostItTitle());
 		post.setPostItContents(postItDto.getPostItContents());
 		
 		postRepo.save(post);
 
-		return getAllPostItByUpdTime();
+		return getAllPostItByUserIdAndUpdTime(userId);
 	}
 
-	public List<PostItDto> markPostIdAsDeleted(Long postId) {
-		PostIt post = findPostItByPostItId(postId);
+	public List<PostItDto> markPostIdAsDeleted(Long postId, Long userId) {
+		PostIt post = findPostItByPostItId(postId, userId);
 		
 		post.setDelFlg(true);
 		postRepo.save(post);
 		
-		return getAllPostItByUpdTime();
+		return getAllPostItByUserIdAndUpdTime(userId);
 	}
 
-	public List<PostItDto> deletePostIt(Long postId) {
-		PostIt post = findPostItByPostItId(postId);
-
+	public List<PostItDto> deletePostIt(Long postId, Long userId) {
 		postRepo.deleteById(postId);
 
-		return getAllPostItByUpdTime();
+		return getAllPostItByUserIdAndUpdTime(userId);
 	}
-
 }

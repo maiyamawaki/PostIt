@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpSession;
+
 import com.joy.backend.service.AuthenticationService;
+
 import com.joy.backend.dto.UsrDto;
 import com.joy.backend.dto.LoginRequest;
 import com.joy.backend.dto.RegisterRequest;
@@ -25,12 +28,13 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
 		UsrDto usrDto = usrService.loginByEmail(loginRequest);
 		if(usrDto == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 													 	.body(Map.of("message", "Invalid email or password"));
 		} else {
+			session.setAttribute("LOGIN_USERID", usrDto.getUserId());
 			return ResponseEntity.ok(usrDto);
 		}
 	}

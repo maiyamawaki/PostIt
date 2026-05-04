@@ -6,15 +6,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
 @Entity
 public class PostIt {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long postId;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private Usr usr;
+	
 
 	private String postItTitle;
 
@@ -28,7 +35,8 @@ public class PostIt {
 
 	public PostIt() {}
 
-	public PostIt(String postItTitle, String postItContents) {
+	public PostIt(Usr usr, String postItTitle, String postItContents) {
+		this.usr = usr;
 		this.postItTitle = postItTitle;
 		this.postItContents = postItContents;
 	}
@@ -50,6 +58,14 @@ public class PostIt {
 
 	public String getPostItTitle() {
 		return postItTitle;
+	}
+
+	public Usr getUser() {
+		return usr;
+	}
+
+	public void setUser(Usr usr) {
+		this.usr = usr;
 	}
 
 	public void setPostItTitle(String postItTitle) {

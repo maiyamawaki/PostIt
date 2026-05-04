@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import java.util.List;
 
 import com.joy.backend.service.PostItService;
+
+import jakarta.servlet.http.HttpSession;
+
 import com.joy.backend.dto.PostItDto;
 
 @RestController
@@ -26,32 +29,43 @@ public class PostItController {
 	}
 
 	@GetMapping
-	public List<PostItDto> getAllPostItByUpdTime() {
-		System.out.println("test");
-		return postService.getAllPostItByUpdTime();
+	public List<PostItDto> getAllPostItByUpdTime(HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		return postService.getAllPostItByUserIdAndUpdTime(userId);
 	}
 
 	@PostMapping
-	public List<PostItDto> createPostIt(@RequestBody PostItDto postItDto) {
-		System.out.println("createPostIt called with title: " + postItDto.getPostItTitle() + ", contents: " + postItDto.getPostItContents());
-		return postService.createPostIt(postItDto);
+	public List<PostItDto> createPostIt(@RequestBody PostItDto postItDto,
+																			HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		System.out.println("test : " + userId);
+		return postService.createPostIt(postItDto, userId);
 	}
 
 	@PutMapping("/{postId}")
-	public List<PostItDto> updatePostIt(@PathVariable Long postId, @RequestBody PostItDto postItDto) {
+	public List<PostItDto> updatePostIt(@PathVariable Long postId,
+																			@RequestBody PostItDto postItDto, 
+																			HttpSession session) {
+		Long userId = getUserIdBySession(session);
 		postItDto.setPostId(postId);
-		return postService.updatePostIt(postItDto);
+		return postService.updatePostIt(postItDto, userId);
 	}
 
 	@PatchMapping("/{postId}")
-	public List<PostItDto> markPostItAsDelete(@PathVariable Long postId) {
-		System.out.println("markPostItAsDelete called with postId: " + postId);
-		return postService.markPostIdAsDeleted(postId);
+	public List<PostItDto> markPostItAsDelete(@PathVariable Long postId, 
+																						HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		return postService.markPostIdAsDeleted(postId, userId);
 	}
 
 	@DeleteMapping("/{postId}")
-	public List<PostItDto> deletePostId(@PathVariable Long postId) {
-		return postService.deletePostIt(postId);
+	public List<PostItDto> deletePostId(@PathVariable Long postId, HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		return postService.deletePostIt(postId, userId);
 	} 
 
+	private Long getUserIdBySession(HttpSession session) {
+		Long userId = (Long)session.getAttribute("LOGIN_USERID");
+		return userId;
+	}
 }
