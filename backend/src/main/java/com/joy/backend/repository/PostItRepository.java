@@ -8,7 +8,7 @@ import com.joy.backend.entity.PostIt;
 
 public interface PostItRepository extends JpaRepository<PostIt, Long>{
 	
-	public List<PostIt> findAllByUsr_UserIdAndDelFlgFalseOrderByUpdTimeDesc(Long userId);
+	public List<PostIt> findAllByUser_UserIdAndDelFlgFalseOrderByUpdTimeDesc(Long userId);
 	
-	public PostIt findByPostIdAndUsr_UserId(Long postId, Long userId);
+	public PostIt findByPostIdAndUser_UserId(Long postId, Long userId);
 }

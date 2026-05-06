@@ -32,12 +32,12 @@ public class PostItService {
 	}
 
 	private PostIt findPostItByPostItId(Long postId, Long userId) {
-		PostIt post = postRepo.findByPostIdAndUsr_UserId(postId, userId);
+		PostIt post = postRepo.findByPostIdAndUser_UserId(postId, userId);
 		return post;
 	}
 
 	public List<PostItDto> getAllPostItByUserIdAndUpdTime(Long userId) {
-		List<PostItDto> postList = postRepo.findAllByUsr_UserIdAndDelFlgFalseOrderByUpdTimeDesc(userId)
+		List<PostItDto> postList = postRepo.findAllByUser_UserIdAndDelFlgFalseOrderByUpdTimeDesc(userId)
 																		.stream()
 																		.map(postit->toDto(postit))
 																		.collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class PostItService {
 
 	public List<PostItDto> createPostIt(PostItDto postItDto, Long userId) {
 		Usr usr = usrRepo.findByUserId(userId);
-
+		System.out.println("usr : " + usr);
 		PostIt post = new PostIt(usr,
 														postItDto.getPostItTitle(), 
 														postItDto.getPostItContents());

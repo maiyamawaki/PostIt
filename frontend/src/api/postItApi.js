@@ -33,6 +33,7 @@ export const fetchPostIt = async(postId) => {
 export const createPostIt = async(postItTitle, postItContents) => {
 	const response = await fetch(BASE_URL,{
 		method : "POST",
+		credentials: "include",
 		headers : {"Content-type" : "application/json"},
 		body : JSON.stringify({postItTitle, postItContents}),
 	});
@@ -49,6 +50,7 @@ export const updatePostIt = async(postId, postItTitle, postItContents) => {
 	console.log("numericPostId : " + typeof	numericPostId);	
  	const response = await fetch(`${BASE_URL}/${numericPostId}`,{
 		method : "PUT",
+		credentials: "include",
 		headers : {"Content-type" : "application/json"},
 		body : JSON.stringify({postItTitle, postItContents}),
 	});
@@ -65,6 +67,7 @@ export const deletePostIt = async(postId) => {
 	console.log("numericPostId : " + numericPostId);	
  	const response = await fetch(`${BASE_URL}/${numericPostId}`,{
 		method : "DELETE",
+		credentials: "include"
 	});
 
 	if(!response.ok) {

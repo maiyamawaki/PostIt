@@ -20,9 +20,8 @@ public class PostIt {
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	private Usr usr;
+	private Usr user;
 	
-
 	private String postItTitle;
 
 	private String postItContents;
@@ -35,8 +34,8 @@ public class PostIt {
 
 	public PostIt() {}
 
-	public PostIt(Usr usr, String postItTitle, String postItContents) {
-		this.usr = usr;
+	public PostIt(Usr user, String postItTitle, String postItContents) {
+		this.user = user;
 		this.postItTitle = postItTitle;
 		this.postItContents = postItContents;
 	}
@@ -61,11 +60,11 @@ public class PostIt {
 	}
 
 	public Usr getUser() {
-		return usr;
+		return user;
 	}
 
-	public void setUser(Usr usr) {
-		this.usr = usr;
+	public void setUser(Usr user) {
+		this.user = user;
 	}
 
 	public void setPostItTitle(String postItTitle) {

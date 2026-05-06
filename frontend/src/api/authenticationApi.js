@@ -5,6 +5,7 @@ export const login = async(email, password) => {
 		method : "POST",
 		headers : {"Content-type" : "application/json"},
 		body : JSON.stringify({email, password}),
+		credentials: "include"
 	});
 
 	const data = await response.json();
@@ -19,6 +20,7 @@ export const login = async(email, password) => {
 export const registerUsr = async(userName, email, password) => {
 	const response = await fetch(`${BASE_URL}/registerUsr`, {
 		method : "POST",
+		credentials: "include",
 		headers	:	{"Content-type" : "application/json"},
 		body : JSON.stringify({userName, email, password}),
 	});

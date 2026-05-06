@@ -38,7 +38,6 @@ public class PostItController {
 	public List<PostItDto> createPostIt(@RequestBody PostItDto postItDto,
 																			HttpSession session) {
 		Long userId = getUserIdBySession(session);
-		System.out.println("test : " + userId);
 		return postService.createPostIt(postItDto, userId);
 	}
 
