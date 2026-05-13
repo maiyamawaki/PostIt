@@ -40,9 +40,10 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/registerUsr")
-	public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
+	public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest,HttpSession session) {
 		UsrDto usrDto = usrService.createUsr(registerRequest);
 		if(usrDto != null) {
+			session.setAttribute("LOGIN_USERID", usrDto.getUserId());
 			return ResponseEntity.ok(usrDto);
 		} else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

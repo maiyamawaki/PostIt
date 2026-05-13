@@ -46,7 +46,6 @@ public class PostItService {
 
 	public List<PostItDto> createPostIt(PostItDto postItDto, Long userId) {
 		Usr usr = usrRepo.findByUserId(userId);
-		System.out.println("usr : " + usr);
 		PostIt post = new PostIt(usr,
 														postItDto.getPostItTitle(), 
 														postItDto.getPostItContents());
