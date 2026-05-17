@@ -33,3 +33,15 @@ export const registerUsr = async(userName, email, password) => {
 
 	return data;
 }
+
+export const isLoggedIn = async() => {
+	const response = await fetch(`${BASE_URL}/getUser`, {
+		method : "GET",
+		credentials: "include",
+	});
+	if(response.ok) {
+		return true;
+	} else {
+		return false;
+	}
+}
