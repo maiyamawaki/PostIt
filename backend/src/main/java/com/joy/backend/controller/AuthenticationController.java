@@ -43,6 +43,13 @@ public class AuthenticationController {
 		}
 	}
 
+	@PostMapping("/logout")
+	public ResponseEntity<?> logout(HttpSession session) {
+		System.out.println("Logout called");
+		session.invalidate();
+		return ResponseEntity.ok().build();
+	}
+
 	@GetMapping("/getUser")
 	public ResponseEntity<?> getLoginUser(HttpSession session) {
 		Long userId = (Long)session.getAttribute("LOGIN_USERID");

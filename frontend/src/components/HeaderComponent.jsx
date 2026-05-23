@@ -1,9 +1,22 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../hooks/useAuthentication";
+import { useNavigate } from "react-router-dom";
 
 const HeaderComponent = () => {
 	const {isLogin, loading} = useAuthContext();
-	
+	const { handleLogout } = useLogout();
+	const navigate = useNavigate();
+
+	const onLogout = async() => {
+		try {
+			await handleLogout();
+			navigate("/");	
+		}	catch(err) {
+			console.log(err);
+		}
+	}
+
 	if(loading) {
 		return <div>Loading...</div>;
 	}
@@ -18,6 +31,9 @@ const HeaderComponent = () => {
 			}
 			{isLogin &&
 			<Link to={"/postit/register"}>New PostIt</Link>
+			}
+			{isLogin &&
+			<button to={"/auth/logout"} onClick={onLogout}>Logout</button>
 			}
 		</div>
 	)
