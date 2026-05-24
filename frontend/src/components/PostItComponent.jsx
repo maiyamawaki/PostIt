@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PostItComponent = ({post, onDelete}) => {
+const PostItComponent = ({post, onDelete, onDone}) => {
 
 	const updDate = post.updTime.substring(0, 10).replace("T","");
 	const updTime = post.updTime.substring(11, 16);
@@ -15,6 +15,7 @@ const PostItComponent = ({post, onDelete}) => {
 			</div>
 			<div className="postItButtons">
 				<Link to={`/postit/${post.postId}`}>Edit</Link>
+				<button onClick={onDone}>Done</button>
 				<button onClick={onDelete}>Delete</button>
 			</div>
 		</div>

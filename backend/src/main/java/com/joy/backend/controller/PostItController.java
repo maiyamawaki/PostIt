@@ -50,6 +50,13 @@ public class PostItController {
 		return postService.updatePostIt(postItDto, userId);
 	}
 
+	@PutMapping("/{postId}/done")
+	public List<PostItDto> updatePostItAsDone(@PathVariable Long postId, 
+																						 HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		return postService.updatePosItAsDone(postId, userId);
+	}
+
 	@PatchMapping("/{postId}")
 	public List<PostItDto> markPostItAsDelete(@PathVariable Long postId, 
 																						HttpSession session) {

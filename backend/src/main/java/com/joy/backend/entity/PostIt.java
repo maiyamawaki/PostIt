@@ -26,6 +26,8 @@ public class PostIt {
 
 	private String postItContents;
 
+	private boolean done;
+
 	private boolean delFlg;
 
 	private LocalDateTime insTime;
@@ -34,10 +36,11 @@ public class PostIt {
 
 	public PostIt() {}
 
-	public PostIt(Usr user, String postItTitle, String postItContents) {
+	public PostIt(Usr user, String postItTitle, String postItContents, boolean done) {
 		this.user = user;
 		this.postItTitle = postItTitle;
 		this.postItContents = postItContents;
+		this.done = done;
 	}
 
 	@PrePersist
@@ -77,6 +80,14 @@ public class PostIt {
 
 	public void setPostItContents(String postItContents) {
 		this.postItContents = postItContents;
+	}
+
+	public boolean isDone() {
+		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
 	}
 
 	public boolean isDelFlg() {

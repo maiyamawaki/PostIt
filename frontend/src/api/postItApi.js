@@ -47,7 +47,6 @@ export const createPostIt = async(postItTitle, postItContents) => {
 
 export const updatePostIt = async(postId, postItTitle, postItContents) => {
 	const numericPostId = Number(postId);
-	console.log("numericPostId : " + typeof	numericPostId);	
  	const response = await fetch(`${BASE_URL}/${numericPostId}`,{
 		method : "PUT",
 		credentials: "include",
@@ -61,6 +60,20 @@ export const updatePostIt = async(postId, postItTitle, postItContents) => {
 
 	return response.json();
 }
+
+export const updatePostItAsDone = async(postId) => {
+  const numericPostId = Number(postId);
+	const response = await fetch(`${BASE_URL}/${numericPostId}/done`,{
+		method : "PUT",
+		credentials : "include",
+		headers : {"Content-type" : "application/json"}
+	});
+	if(!response.ok) {
+		throw new Error("Update PostIt as done function failed");
+	}
+
+	return response.json();
+}; 
 
 export const deletePostIt = async(postId) => {
 	const numericPostId = Number(postId);

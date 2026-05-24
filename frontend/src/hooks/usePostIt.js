@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchAllPostIt, createPostIt, updatePostIt} from "../api/postItApi";
+import { fetchAllPostIt, createPostIt, updatePostIt } from "../api/postItApi";
 
 export const usePostIt = () => {
 	const [postIts, setPostIts] = useState([]);
@@ -24,7 +24,6 @@ export const usePostIt = () => {
 export const useCreatePostIt = () => {
 	const handleCreate = async (postItTitle, postItContents) => {
 		try {
-			console.log("funcionando");
 			await createPostIt(postItTitle, postItContents);
 		} catch(err) {
 			console.log(err);

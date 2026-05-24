@@ -26,6 +26,7 @@ public class PostItService {
 		PostItDto dto = new PostItDto(postIt.getPostId(), 
 																	postIt.getPostItTitle(), 
 																	postIt.getPostItContents(), 
+																	postIt.isDone(),
 																	postIt.getInsTime(), 
 																	postIt.getUpdTime());
 		return dto;
@@ -37,7 +38,7 @@ public class PostItService {
 	}
 
 	public List<PostItDto> getAllPostItByUserIdAndUpdTime(Long userId) {
-		List<PostItDto> postList = postRepo.findAllByUser_UserIdAndDelFlgFalseOrderByUpdTimeDesc(userId)
+		List<PostItDto> postList = postRepo.findAllByUser_UserIdAndDoneFalseAndDelFlgFalseOrderByUpdTimeDesc(userId)
 																		.stream()
 																		.map(postit->toDto(postit))
 																		.collect(Collectors.toList());
@@ -48,7 +49,8 @@ public class PostItService {
 		Usr usr = usrRepo.findByUserId(userId);
 		PostIt post = new PostIt(usr,
 														postItDto.getPostItTitle(), 
-														postItDto.getPostItContents());
+														postItDto.getPostItContents(),
+														false);
 		postRepo.save(post);
 
 		return getAllPostItByUserIdAndUpdTime(userId);
@@ -66,7 +68,14 @@ public class PostItService {
 		return getAllPostItByUserIdAndUpdTime(userId);
 	}
 
-	public List<PostItDto> markPostIdAsDeleted(Long postId, Long userId) {
+	public List<PostItDto> updatePosItAsDone(Long postId, Long userId) {
+		PostIt post = findPostItByPostItId(postId, userId);
+		post.setDone(true);
+		postRepo.save(post);
+		return getAllPostItByUserIdAndUpdTime(userId);
+ 	}	
+ 
+	 public List<PostItDto> markPostIdAsDeleted(Long postId, Long userId) {
 		PostIt post = findPostItByPostItId(postId, userId);
 		
 		post.setDelFlg(true);

@@ -60,10 +60,10 @@ a{
 }
 
 .postItButtons {
-  width: 30%;
+  width: 45%;
   display: flex;
   justify-content: space-between;
-  margin: 10px 0px 10px 60%;
+  margin: 10px 0px 10px 50%;
 }
 
 .registerPostIt,
