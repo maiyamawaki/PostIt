@@ -16,9 +16,11 @@ export const useLogin = () => {
 }
 
 export const useRegisterUsr = () => {
+	const {setIsLogin} = useAuthContext();
 	const handleRegisterUsr = async(userName, email, password) => {
 		try {
 			await registerUsr(userName,email,password);
+			setIsLogin(true);
 		} catch (err) {
 			console.log(err);
 			throw err;
