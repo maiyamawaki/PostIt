@@ -45,6 +45,13 @@ public class PostItService {
 		return postList;
 	}
 
+	public List<PostItDto> getAllDonePostItByUserIdAndUpdTime(Long userId) {
+		List<PostItDto> postList = postRepo.findAllByUser_UserIdAndDoneTrueAndDelFlgFalseOrderByUpdTimeDesc(userId)
+																		.stream()
+																		.map(postit->toDto(postit))
+																		.collect(Collectors.toList());
+		return postList;
+	}
 	public List<PostItDto> createPostIt(PostItDto postItDto, Long userId) {
 		Usr usr = usrRepo.findByUserId(userId);
 		PostIt post = new PostIt(usr,

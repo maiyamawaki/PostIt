@@ -34,6 +34,12 @@ public class PostItController {
 		return postService.getAllPostItByUserIdAndUpdTime(userId);
 	}
 
+	@GetMapping("/done")
+	public List<PostItDto> getAllDonePostItByUpdTime(HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		return postService.getAllDonePostItByUserIdAndUpdTime(userId);
+	}
+
 	@PostMapping
 	public List<PostItDto> createPostIt(@RequestBody PostItDto postItDto,
 																			HttpSession session) {
