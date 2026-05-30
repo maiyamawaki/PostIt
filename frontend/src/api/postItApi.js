@@ -15,6 +15,21 @@ export const fetchAllPostIt = async () => {
 	return postItData;
 }
 
+export const fetchAllDonePostIt = async() => {
+	const response = await fetch(`${BASE_URL}/done`, {
+		method : "GET",
+		cretedentials: "include"
+	})
+
+	if(!response.ok) {
+		throw new Error("Fetch all done PostIt failed");
+	}
+	
+	const postItData = await response.json();
+	
+	return postItData;
+}
+
 export const fetchPostIt = async(postId) => {
 	const response = await fetch(`${BASE_URL}/${postId}`,{
 		method : "GET",
