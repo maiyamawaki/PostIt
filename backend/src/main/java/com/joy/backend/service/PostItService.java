@@ -50,8 +50,10 @@ public class PostItService {
 																		.stream()
 																		.map(postit->toDto(postit))
 																		.collect(Collectors.toList());
+		System.out.println("postListSize : " + postList.size());
 		return postList;
 	}
+
 	public List<PostItDto> createPostIt(PostItDto postItDto, Long userId) {
 		Usr usr = usrRepo.findByUserId(userId);
 		PostIt post = new PostIt(usr,

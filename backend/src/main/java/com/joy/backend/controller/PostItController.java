@@ -37,6 +37,7 @@ public class PostItController {
 	@GetMapping("/donePostIts")
 	public List<PostItDto> getAllDonePostItByUpdTime(HttpSession session) {
 		Long userId = getUserIdBySession(session);
+		System.out.println("donePostIt : " + userId);
 		return postService.getAllDonePostItByUserIdAndUpdTime(userId);
 	}
 

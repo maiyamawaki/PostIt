@@ -25,16 +25,17 @@ export const useAllDonePostIt = () => {
 	const [error, setError] = useState(null);
 	const [postIts, setPostIts] = useState([]);
 
-	const getAllDonePostIt = async()=>{
+	useEffect(() => {
+		const getAllDonePostIt = async()=>{
 			try {
 				const postItData = await fetchAllDonePostIt();
 				setPostIts(postItData);
 			} catch (err) {
 				setError(err);
 			}
-	}
-
-	getAllDonePostIt();
+		}
+		getAllDonePostIt();
+	},[]);
 	
 	return {postIts, error};
 }
