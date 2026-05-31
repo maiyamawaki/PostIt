@@ -33,7 +33,10 @@ export const useAllDonePostIt = () => {
 				setError(err);
 			}
 	}
-	return {postIts, error, getAllDonePostIt};
+
+	getAllDonePostIt();
+	
+	return {postIts, error};
 }
 
 export const useCreatePostIt = () => {

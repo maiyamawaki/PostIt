@@ -1,5 +1,6 @@
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import AllPostIItPage from "./pages/AllPostIItPage";
+import AllDonePostItPage from "./pages/AllDonePostItPage";
 import RegisterPostIt from "./pages/RegisterPostIt";
 import UpdatePostIt from "./pages/UpdatePostIt";
 import LoginPage from "./pages/LoginPage";
@@ -14,13 +15,13 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/auth/register" element={<RegisterUsrPage />} />
+          <Route path="/postit/donePostIts" element={<AllDonePostItPage />} />
           <Route path="/postit" element={<AllPostIItPage />} />
           <Route path="/postit/register" element={<RegisterPostIt />} />
           <Route path="/postit/:postId" element={<UpdatePostIt />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
-
   )
 }
 

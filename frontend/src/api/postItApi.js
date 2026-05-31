@@ -16,7 +16,7 @@ export const fetchAllPostIt = async () => {
 }
 
 export const fetchAllDonePostIt = async() => {
-	const response = await fetch(`${BASE_URL}/done`, {
+	const response = await fetch(`${BASE_URL}/donePostIts`, {
 		method : "GET",
 		cretedentials: "include"
 	})

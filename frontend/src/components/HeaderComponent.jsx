@@ -36,6 +36,9 @@ const HeaderComponent = () => {
 			<Link to={"/postit/register"}>New PostIt</Link>
 			}
 			{isLogin &&
+			<Link to={"/postit/donePostIts"}>Done</Link>
+			}
+			{isLogin &&
 			<button to={"/auth/logout"} onClick={onLogout}>Logout</button>
 			}
 		</div>
