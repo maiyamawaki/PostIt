@@ -18,15 +18,15 @@ export const fetchAllPostIt = async () => {
 export const fetchAllDonePostIt = async() => {
 	const response = await fetch(`${BASE_URL}/donePostIts`, {
 		method : "GET",
-		cretedentials: "include"
+		credentials: "include"
 	})
 
 	if(!response.ok) {
 		throw new Error("Fetch all done PostIt failed");
 	}
-	
 	const postItData = await response.json();
 	
+	console.log("test" + postItData);
 	return postItData;
 }
 

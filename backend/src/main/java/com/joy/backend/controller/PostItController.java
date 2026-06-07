@@ -31,6 +31,7 @@ public class PostItController {
 	@GetMapping
 	public List<PostItDto> getAllPostItByUpdTime(HttpSession session) {
 		Long userId = getUserIdBySession(session);
+		System.out.println("postItGet : " + userId);
 		return postService.getAllPostItByUserIdAndUpdTime(userId);
 	}
 
@@ -59,7 +60,7 @@ public class PostItController {
 
 	@PutMapping("/{postId}/done")
 	public List<PostItDto> updatePostItAsDone(@PathVariable Long postId, 
-																						 HttpSession session) {
+																						HttpSession session) {
 		Long userId = getUserIdBySession(session);
 		return postService.updatePosItAsDone(postId, userId);
 	}

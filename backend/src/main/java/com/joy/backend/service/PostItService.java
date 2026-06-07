@@ -50,7 +50,6 @@ public class PostItService {
 																		.stream()
 																		.map(postit->toDto(postit))
 																		.collect(Collectors.toList());
-		System.out.println("postListSize : " + postList.size());
 		return postList;
 	}
 
