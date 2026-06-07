@@ -12,6 +12,8 @@ const PostItComponent = ({post, onDelete, onDone}) => {
 				<h3>{post.postItTitle}</h3>
 				<label>updTime : {updDate} {updTime}</label>
 				<p>{post.postItContents}</p>
+				<br />
+				<label>category : {post.postItCategory}	</label>
 			</div>
 			<div className="postItButtons">
 				<Link to={`/postit/${post.postId}`}>Edit</Link>

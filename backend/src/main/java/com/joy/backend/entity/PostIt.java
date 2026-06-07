@@ -26,6 +26,8 @@ public class PostIt {
 
 	private String postItContents;
 
+	private String postItCategory;
+
 	private boolean done;
 
 	private boolean delFlg;
@@ -36,10 +38,11 @@ public class PostIt {
 
 	public PostIt() {}
 
-	public PostIt(Usr user, String postItTitle, String postItContents, boolean done) {
+	public PostIt(Usr user, String postItTitle, String postItContents, String postItCategory, boolean done) {
 		this.user = user;
 		this.postItTitle = postItTitle;
 		this.postItContents = postItContents;
+		this.postItCategory = postItCategory;
 		this.done = done;
 	}
 
@@ -80,6 +83,14 @@ public class PostIt {
 
 	public void setPostItContents(String postItContents) {
 		this.postItContents = postItContents;
+	}
+
+	public String getPostItCategory() {
+		return postItCategory;
+	}
+
+	public void setPostItCategory(String postItCategory) {
+		this.postItCategory = postItCategory;
 	}
 
 	public boolean isDone() {

@@ -2,7 +2,6 @@ package com.joy.backend.controller;
 
 import java.util.Map;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,6 @@ import com.joy.backend.dto.UsrDto;
 import com.joy.backend.dto.LoginRequest;
 import com.joy.backend.dto.RegisterRequest;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -45,7 +43,6 @@ public class AuthenticationController {
 
 	@PostMapping("/logout")
 	public ResponseEntity<?> logout(HttpSession session) {
-		System.out.println("Logout called");
 		session.invalidate();
 		return ResponseEntity.ok().build();
 	}
@@ -53,9 +50,8 @@ public class AuthenticationController {
 	@GetMapping("/getUser")
 	public ResponseEntity<?> getLoginUser(HttpSession session) {
 		Long userId = (Long)session.getAttribute("LOGIN_USERID");
-		System.out.println("userId: " + userId);
 		if(userId == null) {
-			return ResponseEntity.status(401).body("NOT LOGNI");
+			return ResponseEntity.status(401).body("NOT LOGGED IN");
 		}
 		return ResponseEntity.ok(userId);
 	}

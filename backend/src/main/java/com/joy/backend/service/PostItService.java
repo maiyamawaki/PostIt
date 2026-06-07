@@ -26,6 +26,7 @@ public class PostItService {
 		PostItDto dto = new PostItDto(postIt.getPostId(), 
 																	postIt.getPostItTitle(), 
 																	postIt.getPostItContents(), 
+																	postIt.getPostItCategory(),
 																	postIt.isDone(),
 																	postIt.getInsTime(), 
 																	postIt.getUpdTime());
@@ -58,6 +59,7 @@ public class PostItService {
 		PostIt post = new PostIt(usr,
 														postItDto.getPostItTitle(), 
 														postItDto.getPostItContents(),
+														postItDto.getPostItCategory(),
 														false);
 		postRepo.save(post);
 

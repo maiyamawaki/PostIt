@@ -9,13 +9,15 @@ const RegisterPostIt = () => {
 
 	 const [postItTitle,setPostItTitle] = useState("");
 	 const [postItContents,setPostItContents] = useState("");
+	 const [postItCategory,setPostItCategory] = useState("Personal");
 
 	 const handleRegisterSubmit = async(e) => {
 		e.preventDefault();
 		try {
-			await handleCreate(postItTitle, postItContents);
+			await handleCreate(postItTitle, postItContents, postItCategory);
 			setPostItTitle("");
 			setPostItContents("");
+			setPostItCategory("Personal");
 			navigate("/postit");
 		} catch (err) {
 			console.log(err);
@@ -42,6 +44,17 @@ const RegisterPostIt = () => {
 							value={postItContents}
 							onChange={(e) => setPostItContents(e.target.value)}
 						/>
+					</div>
+					<div className="postItCategory">
+						<label>CATEGORY : </label>
+						<select
+							value={postItCategory}
+							onChange={(e) => setPostItCategory(e.target.value)}
+						>
+							<option value="Personal">Personal</option>
+							<option value="Work">Work</option>
+							<option value="Ideas">Ideas</option>
+						</select>
 					</div>
 					<button type="submit">Create PostIt</button>
 				</form>

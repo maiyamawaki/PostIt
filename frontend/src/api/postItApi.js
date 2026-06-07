@@ -45,12 +45,12 @@ export const fetchPostIt = async(postId) => {
 	return postItData;
 }
 
-export const createPostIt = async(postItTitle, postItContents) => {
+export const createPostIt = async(postItTitle, postItContents, postItCategory) => {
 	const response = await fetch(BASE_URL,{
 		method : "POST",
 		credentials: "include",
 		headers : {"Content-type" : "application/json"},
-		body : JSON.stringify({postItTitle, postItContents}),
+		body : JSON.stringify({postItTitle, postItContents, postItCategory}),
 	});
 
 	if(!response.ok) {
@@ -60,13 +60,13 @@ export const createPostIt = async(postItTitle, postItContents) => {
 	return response.json();
 }
 
-export const updatePostIt = async(postId, postItTitle, postItContents) => {
+export const updatePostIt = async(postId, postItTitle, postItContents, postItCategory) => {
 	const numericPostId = Number(postId);
  	const response = await fetch(`${BASE_URL}/${numericPostId}`,{
 		method : "PUT",
 		credentials: "include",
 		headers : {"Content-type" : "application/json"},
-		body : JSON.stringify({postItTitle, postItContents}),
+		body : JSON.stringify({postItTitle, postItContents, postItCategory}),
 	});
 
 	if(!response.ok) {

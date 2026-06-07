@@ -31,14 +31,12 @@ public class PostItController {
 	@GetMapping
 	public List<PostItDto> getAllPostItByUpdTime(HttpSession session) {
 		Long userId = getUserIdBySession(session);
-		System.out.println("postItGet : " + userId);
 		return postService.getAllPostItByUserIdAndUpdTime(userId);
 	}
 
 	@GetMapping("/donePostIts")
 	public List<PostItDto> getAllDonePostItByUpdTime(HttpSession session) {
 		Long userId = getUserIdBySession(session);
-		System.out.println("donePostIt : " + userId);
 		return postService.getAllDonePostItByUserIdAndUpdTime(userId);
 	}
 

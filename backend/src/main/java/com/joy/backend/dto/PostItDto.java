@@ -9,6 +9,8 @@ public class PostItDto {
 
 	private String postItContents;
 
+	private String postItCategory;
+
 	private boolean done;
 
 	private boolean delFlg;
@@ -19,10 +21,11 @@ public class PostItDto {
 
 	public PostItDto() {}
 
-	public PostItDto(Long postId, String postItTitle, String postItContents, boolean done, LocalDateTime insTime, LocalDateTime updTime) {
+	public PostItDto(Long postId, String postItTitle, String postItContents, String postItCategory, boolean done, LocalDateTime insTime, LocalDateTime updTime) {
 		this.postId = postId;
 		this.postItTitle = postItTitle;
 		this.postItContents = postItContents;
+		this.postItCategory = postItCategory;
 		this.done = done;
 		this.insTime = insTime;
 		this.updTime = updTime;
@@ -50,6 +53,14 @@ public class PostItDto {
 
 	public void setPostItContents(String postItContents) {
 		this.postItContents = postItContents;
+	}
+
+	public String getPostItCategory() {
+		return postItCategory;
+	}	
+
+	public void setPostItCategory(String postItCategory) {
+		this.postItCategory = postItCategory;
 	}
 
 	public boolean isDone() {
