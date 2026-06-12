@@ -35,6 +35,7 @@ public class PostItService {
 
 	private PostIt findPostItByPostItId(Long postId, Long userId) {
 		PostIt post = postRepo.findByPostIdAndUser_UserId(postId, userId);
+		System.out.println("postId: " + postId);
 		return post;
 	}
 
