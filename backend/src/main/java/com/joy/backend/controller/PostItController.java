@@ -27,7 +27,7 @@ public class PostItController {
 	public PostItController(PostItService postService) {
 		this.postService = postService;
 	}
-
+ 
 	@GetMapping
 	public List<PostItDto> getAllPostItByUpdTime(HttpSession session) {
 		Long userId = getUserIdBySession(session);
