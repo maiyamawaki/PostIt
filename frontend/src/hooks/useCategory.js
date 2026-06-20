@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {fetchAllCategory, createCategory} from '../api/categoryApi';
+import {fetchAllCategory, createCategory, deleteCategory} from '../api/categoryApi';
 
 export const useCategory = () => {
 	const [category, setCategory] = useState([]);
@@ -19,7 +19,7 @@ export const useCategory = () => {
 		getCategory();
 	},[]);
 
-	return {category, error, refetch : getCategory};
+	return {category, error, imp : getCategory};
 }
 
 export const useCreateCategory = () => {

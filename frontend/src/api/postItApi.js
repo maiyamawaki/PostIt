@@ -92,7 +92,6 @@ export const updatePostItAsDone = async(postId) => {
 
 export const deletePostIt = async(postId) => {
 	const numericPostId = Number(postId);
-	console.log("numericPostId : " + numericPostId);	
  	const response = await fetch(`${BASE_URL}/${numericPostId}`,{
 		method : "DELETE",
 		credentials: "include"

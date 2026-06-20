@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useCreatePostIt } from "../hooks/usePostIt";
+import { useCategory } from "../hooks/useCategory";
 import { useNavigate } from "react-router-dom";
 import HeaderComponent from "../components/HeaderComponent" 
 
 const RegisterPostIt = () => {
 	const {handleCreate} = useCreatePostIt();
 	const navigate = useNavigate();
+	const {category} = useCategory();
 
 	 const [postItTitle,setPostItTitle] = useState("");
 	 const [postItContents,setPostItContents] = useState("");
@@ -51,9 +53,11 @@ const RegisterPostIt = () => {
 							value={postItCategory}
 							onChange={(e) => setPostItCategory(e.target.value)}
 						>
-							<option value="Personal">Personal</option>
-							<option value="Work">Work</option>
-							<option value="Ideas">Ideas</option>
+							{category.map((cate)=> {
+								return <option 
+								key = {cate.categoryId} 
+								value={cate.categoryName}>{cate.categoryName}</option>
+							})}
 						</select>
 					</div>
 					<button type="submit">Create PostIt</button>

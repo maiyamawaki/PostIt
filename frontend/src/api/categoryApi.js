@@ -29,3 +29,17 @@ export const createCategory = async(categoryName) => {
 
 	return response.json();
 }
+
+export const deleteCategory = async(categoryId) => {
+	const numericCategoryId = Number(categoryId);
+	const response = await fetch(`${BASE_URL}/${numericCategoryId}`, {
+		method : "DELETE",
+		credentials: "include",
+	});
+
+	if(!response.ok) {
+		throw new Error("Delete category function failed");
+	}
+
+	return response.json();
+}
