@@ -47,5 +47,14 @@ public class CategoryService {
 		categoryRepo.save(category);
 		return getAllCategoryByUserIdAndUpdTime(userId);
 	}
+
+	public List<CategoryDto> deleteCategory(Long categoryId, Long userId) {
+		Category category = categoryRepo.findByCategoryIdAndUser_UserId(categoryId, userId);
+		if(category != null) {
+			category.setDelFlg(true);
+			categoryRepo.save(category);
+		}
+		return getAllCategoryByUserIdAndUpdTime(userId);
+	}
 	
 }

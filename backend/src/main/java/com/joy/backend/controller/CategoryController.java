@@ -2,9 +2,11 @@ package com.joy.backend.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,6 +37,13 @@ public class CategoryController {
 		Long userId = getUserIdBySession(session);
 		return categoryService.createCategory(categoryDto, userId);
 	}
+
+	@DeleteMapping("/{categoryId}")
+	public List<CategoryDto> deleteCategory(@PathVariable Long categoryId, HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		return categoryService.deleteCategory(categoryId, userId);
+	}
+	
 
 
 	private Long getUserIdBySession(HttpSession session) {
