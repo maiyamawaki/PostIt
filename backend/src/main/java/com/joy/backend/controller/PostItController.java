@@ -33,6 +33,12 @@ public class PostItController {
 		Long userId = getUserIdBySession(session);
 		return postService.getAllPostItByUserIdAndUpdTime(userId);
 	}
+	 
+	@GetMapping("/{postId}")	
+	public PostItDto getPostItByUserIdAndPostId(@PathVariable Long postId, HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		return postService.findPostItByUserIdAndPostItId(postId, userId);
+	}
 
 	@GetMapping("/donePostIts")
 	public List<PostItDto> getAllDonePostItByUpdTime(HttpSession session) {

@@ -16,9 +16,15 @@ const PostItComponent = ({post, onDelete, onDone}) => {
 				<label>category : {post.postItCategory}	</label>
 			</div>
 			<div className="postItButtons">
+				{!post.done &&
 				<Link to={`/postit/${post.postId}`}>Edit</Link>
+				}
+				{!post.done &&
 				<button onClick={onDone}>Done</button>
+				}
+				{!post.done &&
 				<button onClick={onDelete}>Delete</button>
+				}
 			</div>
 		</div>
 	)

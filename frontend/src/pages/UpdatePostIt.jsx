@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import {useUpdatePostIt} from "../hooks/usePostIt";
+import {useUpdatePostIt, useGetPostIt} from "../hooks/usePostIt";
 import { useState } from "react";
 import HeaderComponent from "../components/HeaderComponent" 
 
@@ -7,6 +7,7 @@ const UpdatePostIt = () => {
 	const navigate = useNavigate();
 	const {postId} = useParams();
 	const {handleUpdate} = useUpdatePostIt(postId);
+	const {post} = useGetPostIt(postId);
 
 	const [postItTitle, setPostItTitle] = useState("");
 	const [postItContents, setPostItContents] = useState("");
@@ -33,6 +34,7 @@ const UpdatePostIt = () => {
 						<label>TITLE : </label>
 						<input
 							type="text"
+							placeholder={post?.postItTitle}
 							value={postItTitle}
 							onChange={(e) => setPostItTitle(e.target.value)}
 						/>
@@ -41,6 +43,7 @@ const UpdatePostIt = () => {
 						<label>CONTENTS : </label>
 						<textarea
 							value={postItContents}
+							placeholder={post?.postItContents}
 							onChange={(e) => setPostItContents(e.target.value)}
 						/>
 					</div>

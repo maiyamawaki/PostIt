@@ -98,8 +98,15 @@ a{
 
 .category {
   background-color : #c1cf2b;
-  width:250px;
-  height: 60px;
-  padding: 20px;
+  width:180px;
+  height: 50px;
+  padding: 5px;
   margin: 30px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category button {
+  height: 20px;
 }

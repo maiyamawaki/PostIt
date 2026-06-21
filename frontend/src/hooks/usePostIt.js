@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchAllPostIt, fetchAllDonePostIt, createPostIt, updatePostIt } from "../api/postItApi";
+import { fetchAllPostIt, fetchPostIt, fetchAllDonePostIt, createPostIt, updatePostIt } from "../api/postItApi";
 
 export const usePostIt = () => {
 	const [postIts, setPostIts] = useState([]);
@@ -20,6 +20,25 @@ export const usePostIt = () => {
 	}, []);
 	return {postIts, error, refetch : getPostIts};
 };
+
+export const useGetPostIt = (postId) => {
+	const [post, setPost] = useState(null);
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const getPostItById = async() => {
+			try {
+				const postItData = await fetchPostIt(postId);
+				setPost(postItData);
+			} catch (err) {
+				setError(err);
+			}
+		}
+		getPostItById();
+	}, [postId]);
+	
+	return {post, error};
+}
 
 export const useAllDonePostIt = () => {
 	const [error, setError] = useState(null);

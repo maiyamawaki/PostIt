@@ -38,6 +38,11 @@ public class PostItService {
 		return post;
 	}
 
+	public PostItDto findPostItByUserIdAndPostItId(Long postId, Long userId) {
+		PostIt post = findPostItByPostItId(postId, userId);
+		return toDto(post);
+	}
+
 	public List<PostItDto> getAllPostItByUserIdAndUpdTime(Long userId) {
 		List<PostItDto> postList = postRepo.findAllByUser_UserIdAndDoneFalseAndDelFlgFalseOrderByUpdTimeDesc(userId)
 																		.stream()

@@ -26,7 +26,6 @@ export const fetchAllDonePostIt = async() => {
 	}
 	const postItData = await response.json();
 	
-	console.log("test" + postItData);
 	return postItData;
 }
 
