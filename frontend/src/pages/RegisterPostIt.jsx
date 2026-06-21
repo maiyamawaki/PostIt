@@ -19,7 +19,7 @@ const RegisterPostIt = () => {
 			await handleCreate(postItTitle, postItContents, postItCategory);
 			setPostItTitle("");
 			setPostItContents("");
-			setPostItCategory("Personal");
+			setPostItCategory("");
 			navigate("/postit");
 		} catch (err) {
 			console.log(err);
