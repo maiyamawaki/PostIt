@@ -18,7 +18,7 @@ const UpdatePostIt = () => {
 			await handleUpdate(postItTitle, postItContents);
 			setPostItTitle("");
 			setPostItContents("");
-			navigate("/");
+			navigate("/postit");
 		} catch (err) {
 			console.log(err);
 		}
