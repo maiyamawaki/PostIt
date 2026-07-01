@@ -8,15 +8,17 @@ const CategoryPage = () => {
 	const {category, refetch} = useCategory();
 	const {handleCreate} = useCreateCategory();
 	const [categoryName, setCategoryName] = useState("");
+	const [error, setError] = useState({});
 
 	const handleRegisterSubmit = async(e) => {
 		e.preventDefault();
 		try {
 			await handleCreate(categoryName);
 			setCategoryName("");
+			setError({});
 			refetch();
 		} catch (error) {
-			console.error("Error creating category:", error);
+			setError(error);
 		}
 	}
 
@@ -36,6 +38,7 @@ const CategoryPage = () => {
 			<h1>Category</h1>
 			<form onSubmit = {handleRegisterSubmit}>
 				<div className="categoryName">
+				  {error.categoryName && <p>{error.categoryName}</p>}
 					<label>CATEGORY NAME : </label>
 					<input
 						type="text"

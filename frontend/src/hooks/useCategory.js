@@ -24,11 +24,7 @@ export const useCategory = () => {
 
 export const useCreateCategory = () => {
 	const handleCreate = async(categoryName) => {
-		try {
-			await createCategory(categoryName);
-		} catch(err) {
-			console.log(err);
-		}
+		await createCategory(categoryName);
 	}
 	return {handleCreate};
 }

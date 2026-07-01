@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 import com.joy.backend.service.CategoryService;
 import com.joy.backend.dto.CategoryDto;
@@ -32,8 +33,7 @@ public class CategoryController {
 	}
 
 	@PostMapping
-	public List<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto,HttpSession session) {
-		System.out.println("test : " + categoryDto.getCategoryName());
+	public List<CategoryDto> createCategory(@Valid @RequestBody CategoryDto categoryDto,HttpSession session) {
 		Long userId = getUserIdBySession(session);
 		return categoryService.createCategory(categoryDto, userId);
 	}

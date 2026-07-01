@@ -1,10 +1,15 @@
 package com.joy.backend.dto;
 
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDateTime;
 
 public class CategoryDto {
 	private Long categoryId;
 
+	@NotBlank(message = "Category name is required")
+	@Size(max = 50, message = "Category name must be less than or equal to 50 characters")
 	private String categoryName;
 
 	private boolean delFlg;
