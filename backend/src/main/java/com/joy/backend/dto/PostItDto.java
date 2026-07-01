@@ -2,13 +2,18 @@ package com.joy.backend.dto;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class PostItDto {
 	private Long postId;
 
+	@NotBlank(message = "PostIt title is required")
 	private String postItTitle;
 
+	@NotBlank(message = "PostIt contents is required")
 	private String postItContents;
 
+	@NotBlank(message = "PostIt category is required")
 	private String postItCategory;
 
 	private boolean done;

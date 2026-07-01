@@ -15,6 +15,7 @@ import java.util.List;
 import com.joy.backend.service.PostItService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 import com.joy.backend.dto.PostItDto;
 
@@ -47,14 +48,14 @@ public class PostItController {
 	}
 
 	@PostMapping
-	public List<PostItDto> createPostIt(@RequestBody PostItDto postItDto,
+	public List<PostItDto> createPostIt(@Valid @RequestBody PostItDto postItDto,
 																			HttpSession session) {
 		Long userId = getUserIdBySession(session);
 		return postService.createPostIt(postItDto, userId);
 	}
 
 	@PutMapping("/{postId}")
-	public List<PostItDto> updatePostIt(@PathVariable Long postId,
+	public List<PostItDto> updatePostIt(@Valid @PathVariable Long postId,
 																			@RequestBody PostItDto postItDto, 
 																			HttpSession session) {
 		Long userId = getUserIdBySession(session);
@@ -63,21 +64,21 @@ public class PostItController {
 	}
 
 	@PutMapping("/{postId}/done")
-	public List<PostItDto> updatePostItAsDone(@PathVariable Long postId, 
+	public List<PostItDto> updatePostItAsDone(@Valid @PathVariable Long postId, 
 																						HttpSession session) {
 		Long userId = getUserIdBySession(session);
 		return postService.updatePosItAsDone(postId, userId);
 	}
 
 	@PatchMapping("/{postId}")
-	public List<PostItDto> markPostItAsDelete(@PathVariable Long postId, 
+	public List<PostItDto> markPostItAsDelete(@Valid @PathVariable Long postId, 
 																						HttpSession session) {
 		Long userId = getUserIdBySession(session);
 		return postService.markPostIdAsDeleted(postId, userId);
 	}
 
 	@DeleteMapping("/{postId}")
-	public List<PostItDto> deletePostId(@PathVariable Long postId, HttpSession session) {
+	public List<PostItDto> deletePostId(@Valid @PathVariable Long postId, HttpSession session) {
 		Long userId = getUserIdBySession(session);
 		return postService.deletePostIt(postId, userId);
 	} 

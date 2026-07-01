@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 import com.joy.backend.service.AuthenticationService;
 
@@ -30,7 +31,7 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
+	public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest, HttpSession session) {
 		UsrDto usrDto = usrService.loginByEmail(loginRequest);
 		if(usrDto == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -58,7 +59,7 @@ public class AuthenticationController {
 	
 
 	@PostMapping("/registerUsr")
-	public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest,HttpSession session) {
+	public ResponseEntity<?> register(@Valid@RequestBody RegisterRequest registerRequest,HttpSession session) {
 		UsrDto usrDto = usrService.createUsr(registerRequest);
 		if(usrDto != null) {
 			session.setAttribute("LOGIN_USERID", usrDto.getUserId());
