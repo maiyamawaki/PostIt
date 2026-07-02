@@ -10,28 +10,28 @@ const RegisterUsrPage = () => {
 	const [userName, setUserName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setErr] = useState("");
+	const [error, setErr] = useState({});
 
 	const handleRegisterUsrSubmit = async(e) => {
 		e.preventDefault();
 
 		try {
 			await handleRegisterUsr(userName, email, password);
+			setErr({});
 			navigate("/postit");
 		} catch(err) {
-			console.log(err);
-			setErr(err.message);
+			setErr(err);
 		}
 	}
 
 	return (
 		<div className="main">
 			<HeaderComponent />
-			{error && <p style={{ color: "red" }}>{error}</p>}
 			<div className="registerUsrPage">
 				<h2>Register User Information</h2>
 				<form onSubmit={handleRegisterUsrSubmit}>
 					<div className="username">
+						{error.userName && <p style={{ color: "red" }}>{error.userName}</p>}
 						<label>Username : </label>
 						<input 
 								type="text"
@@ -40,6 +40,7 @@ const RegisterUsrPage = () => {
 						/>
 					</div>
 					<div className="email">
+						{error.email && <p style={{ color: "red" }}>{error.email}</p>}
 						<label>Email : </label>
 						<input 
 								type="email"
@@ -48,6 +49,7 @@ const RegisterUsrPage = () => {
 						/>
 					</div>
 					<div className="password">
+						{error.password && <p style={{ color: "red" }}>{error.password}</p>}
 						<label>Password : </label>
 						<input 
 								type="password"

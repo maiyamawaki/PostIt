@@ -53,7 +53,8 @@ export const createPostIt = async(postItTitle, postItContents, postItCategory) =
 	});
 
 	if(!response.ok) {
-		throw new Error("Create PostIt function failed");
+		const errorData = await response.json();
+		throw errorData;
 	}
 
 	return response.json();
@@ -69,7 +70,8 @@ export const updatePostIt = async(postId, postItTitle, postItContents, postItCat
 	});
 
 	if(!response.ok) {
-		throw new Error("Update PostIt function failed");
+		const errorData = await response.json();
+		throw errorData;
 	}
 
 	return response.json();
@@ -83,7 +85,8 @@ export const updatePostItAsDone = async(postId) => {
 		headers : {"Content-type" : "application/json"}
 	});
 	if(!response.ok) {
-		throw new Error("Update PostIt as done function failed");
+		const errorData = await response.json();
+		throw errorData;
 	}
 
 	return response.json();
@@ -97,7 +100,8 @@ export const deletePostIt = async(postId) => {
 	});
 
 	if(!response.ok) {
-		throw new Error("Delete PostIt function failed");
+		const errorData = await response.json();
+		throw errorData;
 	}
 
 	return response.json();

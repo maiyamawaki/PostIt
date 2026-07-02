@@ -4,13 +4,8 @@ import { useAuthContext } from "./useAuthContext";
 export const useLogin = () => {
 	const {setIsLogin} = useAuthContext();
 	const handleLogin = async(email, password) => {
-		try{
-			await login(email, password);
-			setIsLogin(true);
-		} catch(err) {
-			console.log(err);
-			throw err;
-		}
+		await login(email, password);
+		setIsLogin(true);
 	}
 	return {handleLogin};
 }
@@ -18,13 +13,8 @@ export const useLogin = () => {
 export const useRegisterUsr = () => {
 	const {setIsLogin} = useAuthContext();
 	const handleRegisterUsr = async(userName, email, password) => {
-		try {
-			await registerUsr(userName,email,password);
-			setIsLogin(true);
-		} catch (err) {
-			console.log(err);
-			throw err;
-		}
+		await registerUsr(userName,email,password);
+		setIsLogin(true); 
 	}
 	return {handleRegisterUsr}
 }

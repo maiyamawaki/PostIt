@@ -2,10 +2,12 @@ package com.joy.backend.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class RegisterRequest {
 
 	@NotBlank(message = "Username is required")
+	@Size(max = 50, message = "Username must be less than or equal to 50 characters")
 	private String userName;
 
 	@Email(message = "Invalid email format")
@@ -13,6 +15,7 @@ public class RegisterRequest {
 	private String email;
 
 	@NotBlank(message = "Password is required")
+	@Size(min = 8, max = 100, message = "Password must be between 8 and 100 characters")
 	private String password;
 
 	public RegisterRequest() {}

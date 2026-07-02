@@ -77,7 +77,7 @@ public class PostItService {
 
 		post.setPostItTitle(postItDto.getPostItTitle());
 		post.setPostItContents(postItDto.getPostItContents());
-		
+		post.setPostItCategory(postItDto.getPostItCategory());
 		postRepo.save(post);
 
 		return getAllPostItByUserIdAndUpdTime(userId);

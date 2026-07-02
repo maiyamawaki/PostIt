@@ -11,7 +11,8 @@ const RegisterPostIt = () => {
 
 	 const [postItTitle,setPostItTitle] = useState("");
 	 const [postItContents,setPostItContents] = useState("");
-	 const [postItCategory,setPostItCategory] = useState("Personal");
+	 const [postItCategory,setPostItCategory] = useState("");
+	 const [error,setError] = useState({});
 
 	 const handleRegisterSubmit = async(e) => {
 		e.preventDefault();
@@ -20,9 +21,10 @@ const RegisterPostIt = () => {
 			setPostItTitle("");
 			setPostItContents("");
 			setPostItCategory("");
+			setError({});
 			navigate("/postit");
 		} catch (err) {
-			console.log(err);
+			setError(err);
 		}
 	}
 
@@ -31,6 +33,9 @@ const RegisterPostIt = () => {
 			<HeaderComponent />
 			<div className="registerPostIt">
 				<h2>NEW POSTIT</h2>
+				{error.postItTitle && <p>{error.postItTitle}</p>}
+				{error.postItContents && <p>{error.postItContents}</p>}
+				{error.postItCategory && <p>{error.postItCategory}</p>}
 				<form onSubmit={handleRegisterSubmit}>
 					<div className="postItTitle">
 						<label>TITLE : </label>

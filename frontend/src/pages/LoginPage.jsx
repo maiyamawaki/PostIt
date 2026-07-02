@@ -17,21 +17,21 @@ const LoginPage = () => {
 		try {
 			setErr("");
 			await handleLogin(email, password);
+			setErr({});
 			navigate("/postit");
 		} catch(err) {
-			console.log(err);
-			setErr(err.message);
+			setErr(err);
 		}
 	}
 
 	return (
 		<div className="main">
 			<HeaderComponent />
-			{error && <p style={{ color: "red" }}>{error}</p>}
 			<div className="loginPage">
 				<h2>LOGIN</h2>
 				<form onSubmit={handleLoginSubmit}>
 					<div className="email">
+						{error.email && <p style={{ color: "red" }}>{error.email}</p>}
 						<label>EMAIL : </label>
 						<input 
 								type="email"
@@ -40,6 +40,7 @@ const LoginPage = () => {
 						/>
 					</div>
 					<div className="password">
+						{error.password && <p style={{ color: "red" }}>{error.password}</p>}
 						<label>PASSWORD : </label>
 						<input 
 								type="password"

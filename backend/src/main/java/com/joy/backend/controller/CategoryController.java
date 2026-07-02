@@ -44,8 +44,6 @@ public class CategoryController {
 		return categoryService.deleteCategory(categoryId, userId);
 	}
 	
-
-
 	private Long getUserIdBySession(HttpSession session) {
 		Long userId = (Long)session.getAttribute("LOGIN_USERID");
 		return userId;

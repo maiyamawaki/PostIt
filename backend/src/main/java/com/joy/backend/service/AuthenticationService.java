@@ -55,17 +55,11 @@ public class AuthenticationService {
 	public UsrDto loginByEmail(LoginRequest	loginRequest) {
 		Usr user = findUsrByEmail(loginRequest.getEmail());
 		if(user == null) {
-			System.out.println("Login failed");
 			return null;
 		} else {
-			System.out.println(passwordEncoder.matches(loginRequest.getPassword(), user.getPassword()));
-			System.out.println(loginRequest.getPassword());
-			System.out.println(user.getPassword());
 			if(passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-				System.out.println("Login success");
 				return toDto(user);
 			} else {
-				System.out.println("Login failed by password");
 				return null;
 			}
 		}

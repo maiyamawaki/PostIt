@@ -61,23 +61,14 @@ export const useAllDonePostIt = () => {
 
 export const useCreatePostIt = () => {
 	const handleCreate = async (postItTitle, postItContents, postItCategory) => {
-		try {
-			await createPostIt(postItTitle, postItContents, postItCategory);
-		} catch(err) {
-			console.log(err);
-		}
+		await createPostIt(postItTitle, postItContents, postItCategory);
 	}
 	return {handleCreate};
 }
 
 export const useUpdatePostIt = (postId) => {
-
 	const handleUpdate = async(postItTitle, postItContents, postItCategory) => {
-		try {
-			await updatePostIt(postId, postItTitle, postItContents, postItCategory);
-		} catch(err) {
-			console.log(err);
-		}
+		await updatePostIt(postId, postItTitle, postItContents, postItCategory); 
 	}
 	return {handleUpdate};
 }
