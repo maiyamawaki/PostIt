@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useCreatePostIt } from "../hooks/usePostIt";
 import { useCategory } from "../hooks/useCategory";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import HeaderComponent from "../components/HeaderComponent" 
 
 const RegisterPostIt = () => {
+	const {labelId} = useParams();
 	const {handleCreate} = useCreatePostIt();
 	const navigate = useNavigate();
 	const {category} = useCategory();
@@ -17,7 +19,7 @@ const RegisterPostIt = () => {
 	 const handleRegisterSubmit = async(e) => {
 		e.preventDefault();
 		try {
-			await handleCreate(postItTitle, postItContents, postItCategory);
+			await handleCreate(labelId, postItTitle, postItContents, postItCategory);
 			setPostItTitle("");
 			setPostItContents("");
 			setPostItCategory("");

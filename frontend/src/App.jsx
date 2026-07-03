@@ -1,4 +1,5 @@
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import AllPostItLabelPage from "./pages/AllPostItLabelPage";
 import AllPostIItPage from "./pages/AllPostIItPage";
 import AllDonePostItPage from "./pages/AllDonePostItPage";
 import RegisterPostIt from "./pages/RegisterPostIt";
@@ -15,11 +16,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/label" element={<AllPostItLabelPage />} />
           <Route path="/auth/register" element={<RegisterUsrPage />} />
           <Route path="/postit/donePostIts" element={<AllDonePostItPage />} />
-          <Route path="/postit" element={<AllPostIItPage />} />
-          <Route path="/postit/register" element={<RegisterPostIt />} />
-          <Route path="/postit/:postId" element={<UpdatePostIt />} />
+          <Route path="/postit/:labelId" element={<AllPostIItPage />} />
+          <Route path="/postit/:labelId/register" element={<RegisterPostIt />} />
+          <Route path="/postit/:labelId/:postId" element={<UpdatePostIt />} />
           <Route path="/category" element={<CategoryPage />} />
         </Routes>
       </BrowserRouter>

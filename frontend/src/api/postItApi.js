@@ -1,7 +1,7 @@
-const BASE_URL = "http://localhost:8080/postit";
+const BASE_URL = "http://localhost:8080/postit/";
 
-export const fetchAllPostIt = async () => {
-	const response = await fetch(`${BASE_URL}`, {
+export const fetchAllPostIt = async (labelId) => {
+	const response = await fetch(`${BASE_URL}${labelId}`, {
 		method : "GET",
 		credentials: "include"
 	});
@@ -15,8 +15,8 @@ export const fetchAllPostIt = async () => {
 	return postItData;
 }
 
-export const fetchAllDonePostIt = async() => {
-	const response = await fetch(`${BASE_URL}/donePostIts`, {
+export const fetchAllDonePostIt = async(labelId) => {
+	const response = await fetch(`${BASE_URL}${labelId}/donePostIts`, {
 		method : "GET",
 		credentials: "include"
 	})
@@ -29,8 +29,8 @@ export const fetchAllDonePostIt = async() => {
 	return postItData;
 }
 
-export const fetchPostIt = async(postId) => {
-	const response = await fetch(`${BASE_URL}/${postId}`,{
+export const fetchPostIt = async(postId, labelId) => {
+	const response = await fetch(`${BASE_URL}${labelId}/${postId}`,{
 		method : "GET",
 		credentials: "include"
 	});
@@ -44,12 +44,12 @@ export const fetchPostIt = async(postId) => {
 	return postItData;
 }
 
-export const createPostIt = async(postItTitle, postItContents, postItCategory) => {
-	const response = await fetch(BASE_URL,{
+export const createPostIt = async(labelId, postItTitle, postItContents, postItCategory) => {
+	const response = await fetch(`${BASE_URL}${labelId}`,{
 		method : "POST",
 		credentials: "include",
 		headers : {"Content-type" : "application/json"},
-		body : JSON.stringify({postItTitle, postItContents, postItCategory}),
+		body : JSON.stringify({labelId, postItTitle, postItContents, postItCategory}),
 	});
 
 	if(!response.ok) {
@@ -60,13 +60,13 @@ export const createPostIt = async(postItTitle, postItContents, postItCategory) =
 	return response.json();
 }
 
-export const updatePostIt = async(postId, postItTitle, postItContents, postItCategory) => {
+export const updatePostIt = async(labelId, postId, postItTitle, postItContents, postItCategory) => {
 	const numericPostId = Number(postId);
- 	const response = await fetch(`${BASE_URL}/${numericPostId}`,{
+ 	const response = await fetch(`${BASE_URL}${labelId}/${numericPostId}`,{
 		method : "PUT",
 		credentials: "include",
 		headers : {"Content-type" : "application/json"},
-		body : JSON.stringify({postItTitle, postItContents, postItCategory}),
+		body : JSON.stringify({labelId, postItTitle, postItContents, postItCategory}),
 	});
 
 	if(!response.ok) {
@@ -77,9 +77,9 @@ export const updatePostIt = async(postId, postItTitle, postItContents, postItCat
 	return response.json();
 }
 
-export const updatePostItAsDone = async(postId) => {
+export const updatePostItAsDone = async(labelId, postId) => {
   const numericPostId = Number(postId);
-	const response = await fetch(`${BASE_URL}/${numericPostId}/done`,{
+	const response = await fetch(`${BASE_URL}${labelId}/${numericPostId}/done`,{
 		method : "PUT",
 		credentials : "include",
 		headers : {"Content-type" : "application/json"}
@@ -92,9 +92,9 @@ export const updatePostItAsDone = async(postId) => {
 	return response.json();
 }; 
 
-export const deletePostIt = async(postId) => {
+export const deletePostIt = async(labelId, postId) => {
 	const numericPostId = Number(postId);
- 	const response = await fetch(`${BASE_URL}/${numericPostId}`,{
+ 	const response = await fetch(`${BASE_URL}${labelId}/${numericPostId}`,{
 		method : "DELETE",
 		credentials: "include"
 	});

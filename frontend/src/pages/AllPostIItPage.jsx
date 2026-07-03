@@ -1,24 +1,26 @@
 import React from "react";
 import { usePostIt } from "../hooks/usePostIt";
+import { useParams } from "react-router-dom";
 import { deletePostIt, updatePostItAsDone } from "../api/postItApi";
 import PostItComponent from "../components/PostItComponent";
 import HeaderComponent from "../components/HeaderComponent" 
 
 const AllPostItPage = () => {
-	const{postIts, error, refetch} = usePostIt();
+	const {labelId} = useParams();
+	const{postIts, error, refetch} = usePostIt(labelId);
 	
 	const handleUpdatePostItAsDone = async(postId) => {
 		try { 
-			await updatePostItAsDone(postId);
+			await updatePostItAsDone(postId, labelId);
 			refetch();
 		} catch(err) {
 			console.log(err);
 		}
 	}
 
-	const handleDelete = async(postId) => {
+	const handleDelete = async(postId, labelId) => {
 		try {
-			await deletePostIt(postId);
+			await deletePostIt(postId, labelId);
 			refetch();
 		} catch(err) {
 			console.log(err);

@@ -18,7 +18,7 @@ const LoginPage = () => {
 			setErr("");
 			await handleLogin(email, password);
 			setErr({});
-			navigate("/postit");
+			navigate("/label");
 		} catch(err) {
 			setErr(err);
 		}

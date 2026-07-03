@@ -21,6 +21,10 @@ public class PostIt {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private Usr user;
+
+	@ManyToOne
+	@JoinColumn(name="label_id")
+	private PostItLabel postItLabel;
 	
 	private String postItTitle;
 
@@ -38,8 +42,9 @@ public class PostIt {
 
 	public PostIt() {}
 
-	public PostIt(Usr user, String postItTitle, String postItContents, String postItCategory, boolean done) {
+	public PostIt(Usr user, PostItLabel postItlabel, String postItTitle, String postItContents, String postItCategory, boolean done) {
 		this.user = user;
+		this.postItLabel = postItlabel;
 		this.postItTitle = postItTitle;
 		this.postItContents = postItContents;
 		this.postItCategory = postItCategory;
@@ -71,6 +76,14 @@ public class PostIt {
 
 	public void setUser(Usr user) {
 		this.user = user;
+	}
+
+	public PostItLabel getPostItLabel() {
+		return postItLabel;
+	}
+
+	public void setPostItLabel(PostItLabel postItLabel) {
+		this.postItLabel = postItLabel;
 	}
 
 	public void setPostItTitle(String postItTitle) {

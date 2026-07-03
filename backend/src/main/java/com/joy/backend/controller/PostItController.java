@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 import com.joy.backend.dto.PostItDto;
 
 @RestController
-@RequestMapping("/postit")
+@RequestMapping("/postit/{labelId}")
 public class PostItController {
 	
 	private PostItService postService;
@@ -30,57 +30,61 @@ public class PostItController {
 	}
  
 	@GetMapping
-	public List<PostItDto> getAllPostItByUpdTime(HttpSession session) {
+	public List<PostItDto> getAllPostItByUpdTime(HttpSession session, @PathVariable Long labelId) {
 		Long userId = getUserIdBySession(session);
-		return postService.getAllPostItByUserIdAndUpdTime(userId);
+		return postService.getAllPostItByUserIdAndUpdTime(userId, labelId);
 	}
 	 
 	@GetMapping("/{postId}")	
-	public PostItDto getPostItByUserIdAndPostId(@PathVariable Long postId, HttpSession session) {
+	public PostItDto getPostItByUserIdAndPostId(@PathVariable Long postId, HttpSession session, @PathVariable Long labelId) {
 		Long userId = getUserIdBySession(session);
-		return postService.findPostItByUserIdAndPostItId(postId, userId);
+		return postService.findPostItByUserIdAndPostItId(postId, userId, labelId);
 	}
 
 	@GetMapping("/donePostIts")
-	public List<PostItDto> getAllDonePostItByUpdTime(HttpSession session) {
+	public List<PostItDto> getAllDonePostItByUpdTime(HttpSession session, @PathVariable Long labelId) {
 		Long userId = getUserIdBySession(session);
-		return postService.getAllDonePostItByUserIdAndUpdTime(userId);
+		return postService.getAllDonePostItByUserIdAndUpdTime(userId, labelId);
 	}
 
 	@PostMapping
-	public List<PostItDto> createPostIt(@Valid @RequestBody PostItDto postItDto,
+	public List<PostItDto> createPostIt(@Valid @RequestBody PostItDto postItDto, 
+																			@PathVariable Long labelId,
 																			HttpSession session) {
 		Long userId = getUserIdBySession(session);
-		return postService.createPostIt(postItDto, userId);
+		return postService.createPostIt(postItDto, userId, labelId);
 	}
 
 	@PutMapping("/{postId}")
 	public List<PostItDto> updatePostIt(@Valid @PathVariable Long postId,
+																			@PathVariable Long labelId,
 																			@RequestBody PostItDto postItDto, 
 																			HttpSession session) {
 		Long userId = getUserIdBySession(session);
 		postItDto.setPostId(postId);
-		return postService.updatePostIt(postItDto, userId);
+		return postService.updatePostIt(postItDto, userId, labelId);
 	}
 
 	@PutMapping("/{postId}/done")
 	public List<PostItDto> updatePostItAsDone(@Valid @PathVariable Long postId, 
+																						@PathVariable Long labelId,
 																						HttpSession session) {
 		Long userId = getUserIdBySession(session);
-		return postService.updatePosItAsDone(postId, userId);
+		return postService.updatePosItAsDone(postId, userId, labelId);
 	}
 
 	@PatchMapping("/{postId}")
 	public List<PostItDto> markPostItAsDelete(@Valid @PathVariable Long postId, 
+																						@PathVariable Long labelId,
 																						HttpSession session) {
 		Long userId = getUserIdBySession(session);
-		return postService.markPostIdAsDeleted(postId, userId);
+		return postService.markPostIdAsDeleted(postId, userId, labelId);
 	}
 
 	@DeleteMapping("/{postId}")
-	public List<PostItDto> deletePostId(@Valid @PathVariable Long postId, HttpSession session) {
+	public List<PostItDto> deletePostId(@Valid @PathVariable Long postId, @PathVariable Long labelId, HttpSession session) {
 		Long userId = getUserIdBySession(session);
-		return postService.deletePostIt(postId, userId);
+		return postService.deletePostIt(postId, userId, labelId);
 	} 
 
 	private Long getUserIdBySession(HttpSession session) {

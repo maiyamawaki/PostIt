@@ -110,3 +110,9 @@ a{
 .category button {
   height: 20px;
 }
+
+.postItLabel {
+  background-color: #c1cf2b;
+  margin: 20px auto;
+  width: 80%;
+}
