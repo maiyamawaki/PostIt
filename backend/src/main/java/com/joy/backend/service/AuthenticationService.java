@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.joy.backend.repository.UsrRepository;
+
 import com.joy.backend.entity.Usr;
 import com.joy.backend.dto.UsrDto;
 import com.joy.backend.dto.RegisterRequest;
@@ -33,6 +35,7 @@ public class AuthenticationService {
 		return dto;
 	}
 
+	@Transactional(readOnly = true)
 	public List<UsrDto> findAllUsers() {
 		List<UsrDto> usrs = usrRepository.findAll()
 																	.stream()
@@ -42,16 +45,19 @@ public class AuthenticationService {
 		return usrs;
 	}
 
+	@Transactional(readOnly = true)
 	private Usr findUsrByUserName(String userName) {
 		Usr usr = usrRepository.findByUserName(userName);
 		return usr;
 	}
 
+	@Transactional(readOnly = true)	
 	private Usr findUsrByEmail(String email) {
 		Usr usr = usrRepository.findByEmail(email);
 		return usr;
 	}
 
+	@Transactional(readOnly = true)
 	public UsrDto loginByEmail(LoginRequest	loginRequest) {
 		Usr user = findUsrByEmail(loginRequest.getEmail());
 		if(user == null) {
@@ -65,6 +71,7 @@ public class AuthenticationService {
 		}
 	}
 
+	@Transactional
 	public UsrDto createUsr(RegisterRequest registerRequest) {
 		Usr existUser = findUsrByEmail(registerRequest.getEmail());
 		Usr newUsr = null;
@@ -80,6 +87,7 @@ public class AuthenticationService {
 		}
 	}
 
+	@Transactional
 	public UsrDto updateUsr(UsrDto usrDto) {
 		Usr existUser = findUsrByUserName(usrDto.getUserName());
 		if(existUser != null) {

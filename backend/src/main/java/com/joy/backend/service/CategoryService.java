@@ -1,6 +1,7 @@
 package com.joy.backend.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.joy.backend.repository.CategoryRepository;
 import com.joy.backend.repository.UsrRepository;
@@ -31,6 +32,7 @@ public class CategoryService {
 		return dto;
 	}
 
+	@Transactional(readOnly = true)
 	public List<CategoryDto> getAllCategoryByUserIdAndUpdTime(Long userId) {
 		List<CategoryDto> categoryList = categoryRepo.findAllByUser_UserIdAndDelFlgFalseOrderByUpdTimeDesc(userId).
 																		stream()
@@ -39,6 +41,7 @@ public class CategoryService {
 		return categoryList;
 	}
 
+	@Transactional
 	public List<CategoryDto> createCategory(CategoryDto categoryDto, Long userId) {
 		Usr user = userRepo.findByUserId(userId);
 		Category category = new Category(user,
@@ -48,6 +51,7 @@ public class CategoryService {
 		return getAllCategoryByUserIdAndUpdTime(userId);
 	}
 
+	@Transactional
 	public List<CategoryDto> deleteCategory(Long categoryId, Long userId) {
 		Category category = categoryRepo.findByCategoryIdAndUser_UserId(categoryId, userId);
 		if(category != null) {

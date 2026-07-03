@@ -1,6 +1,7 @@
 package com.joy.backend.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,16 +34,19 @@ public class PostItService {
 		return dto;
 	}
 
+	@Transactional(readOnly = true)
 	private PostIt findPostItByPostItId(Long postId, Long userId) {
 		PostIt post = postRepo.findByPostIdAndUser_UserId(postId, userId);
 		return post;
 	}
 
+	@Transactional(readOnly = true)
 	public PostItDto findPostItByUserIdAndPostItId(Long postId, Long userId) {
 		PostIt post = findPostItByPostItId(postId, userId);
 		return toDto(post);
 	}
 
+	@Transactional(readOnly = true)
 	public List<PostItDto> getAllPostItByUserIdAndUpdTime(Long userId) {
 		List<PostItDto> postList = postRepo.findAllByUser_UserIdAndDoneFalseAndDelFlgFalseOrderByUpdTimeDesc(userId)
 																		.stream()
@@ -51,6 +55,7 @@ public class PostItService {
 		return postList;
 	}
 
+	@Transactional(readOnly = true)
 	public List<PostItDto> getAllDonePostItByUserIdAndUpdTime(Long userId) {
 		List<PostItDto> postList = postRepo.findAllByUser_UserIdAndDoneTrueAndDelFlgFalseOrderByUpdTimeDesc(userId)
 																		.stream()
@@ -59,6 +64,7 @@ public class PostItService {
 		return postList;
 	}
 
+	@Transactional
 	public List<PostItDto> createPostIt(PostItDto postItDto, Long userId) {
 		Usr usr = usrRepo.findByUserId(userId);
 		PostIt post = new PostIt(usr,
@@ -71,6 +77,7 @@ public class PostItService {
 		return getAllPostItByUserIdAndUpdTime(userId);
 	}
 
+	@Transactional
 	public List<PostItDto> updatePostIt(PostItDto postItDto, Long userId) {
 		PostIt post = findPostItByPostItId(postItDto.getPostId(), 
 																				userId);
@@ -83,6 +90,7 @@ public class PostItService {
 		return getAllPostItByUserIdAndUpdTime(userId);
 	}
 
+	@Transactional
 	public List<PostItDto> updatePosItAsDone(Long postId, Long userId) {
 		PostIt post = findPostItByPostItId(postId, userId);
 		post.setDone(true);
@@ -90,6 +98,7 @@ public class PostItService {
 		return getAllPostItByUserIdAndUpdTime(userId);
  	}	
  
+	@Transactional
 	 public List<PostItDto> markPostIdAsDeleted(Long postId, Long userId) {
 		PostIt post = findPostItByPostItId(postId, userId);
 		
@@ -99,6 +108,7 @@ public class PostItService {
 		return getAllPostItByUserIdAndUpdTime(userId);
 	}
 
+	@Transactional
 	public List<PostItDto> deletePostIt(Long postId, Long userId) {
 		postRepo.deleteById(postId);
 
