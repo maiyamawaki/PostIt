@@ -60,7 +60,7 @@ export const useAllDonePostIt = (labelId) => {
 }
 
 export const useCreatePostIt = (labelId) => {
-	console.log(labelId);
+	console.log("hooks :" +  labelId);
 	const handleCreate = async (postItTitle, postItContents, postItCategory) => {
 		await createPostIt(labelId, postItTitle, postItContents, postItCategory);
 	}

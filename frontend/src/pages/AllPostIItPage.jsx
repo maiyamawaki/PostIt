@@ -9,6 +9,8 @@ const AllPostItPage = () => {
 	const {labelId} = useParams();
 	const{postIts, error, refetch} = usePostIt(labelId);
 	
+	console.log("test : " + labelId);
+
 	const handleUpdatePostItAsDone = async(postId) => {
 		try { 
 			await updatePostItAsDone(postId, labelId);

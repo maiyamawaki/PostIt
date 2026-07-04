@@ -10,6 +10,8 @@ const HeaderComponent = () => {
 	const { handleLogout } = useLogout();
 	const navigate = useNavigate();
 
+	console.log("header : " + labelId);
+
 	const onLogout = async() => {
 		try {
 			await handleLogout();
@@ -32,16 +34,16 @@ const HeaderComponent = () => {
 			<Link to={"/auth/register"}>Register</Link>
 			}
 			{isLogin &&
-			<Link to={"/postit/{labelId}"}>Home</Link>
+			<Link to={`/postit/${labelId}`}>Home</Link>
 			}
 			{isLogin &&
-			<Link to={"/postit/{labelId}/register"}>New PostIt</Link>
+			<Link to={`/postit/${labelId}/register`}>New PostIt</Link>
 			}
 			{isLogin &&
 			<Link to={"/category"}>Category</Link>
 			}
 			{isLogin &&
-			<Link to={"/postit/:labelId/donePostIts"}>Done</Link>
+			<Link to={`/postit/${labelId}/donePostIts`}>Done</Link>
 			}
 			{isLogin &&
 			<button to={"/auth/logout"} onClick={onLogout}>Logout</button>

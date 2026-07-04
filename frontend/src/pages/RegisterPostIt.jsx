@@ -7,7 +7,7 @@ import HeaderComponent from "../components/HeaderComponent"
 
 const RegisterPostIt = () => {
 	const {labelId} = useParams();
-	const {handleCreate} = useCreatePostIt();
+	const {handleCreate} = useCreatePostIt(labelId);
 	const navigate = useNavigate();
 	const {category} = useCategory();
 
@@ -24,7 +24,7 @@ const RegisterPostIt = () => {
 			setPostItContents("");
 			setPostItCategory("");
 			setError({});
-			navigate("/postit");
+			navigate(`/postit/${labelId}`);
 		} catch (err) {
 			setError(err);
 		}
