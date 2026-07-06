@@ -11,7 +11,7 @@ export const fetchAllPostItLabel = async () => {
 	}
 
 	const postItLabelData = await response.json();
-	console.log("PostItLabelApi fetchAllPostItLabel : " +  postItLabelData);
+
 	return postItLabelData;
 }
 

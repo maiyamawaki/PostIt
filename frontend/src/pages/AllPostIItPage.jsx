@@ -13,16 +13,16 @@ const AllPostItPage = () => {
 
 	const handleUpdatePostItAsDone = async(postId) => {
 		try { 
-			await updatePostItAsDone(postId, labelId);
+			await updatePostItAsDone(labelId, postId);
 			refetch();
 		} catch(err) {
 			console.log(err);
 		}
 	}
 
-	const handleDelete = async(postId, labelId) => {
+	const handleDelete = async(postId) => {
 		try {
-			await deletePostIt(postId, labelId);
+			await deletePostIt(labelId,postId);
 			refetch();
 		} catch(err) {
 			console.log(err);
