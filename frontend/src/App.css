@@ -116,3 +116,10 @@ a{
   margin: 20px auto;
   width: 80%;
 }
+
+.postItLabelDone {
+  background-color: #6f6f6f;
+  color: white;
+  margin: 20px auto;
+  width: 80%;
+}

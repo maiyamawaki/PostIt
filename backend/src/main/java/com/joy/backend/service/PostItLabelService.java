@@ -52,4 +52,12 @@ public class PostItLabelService {
 		postItLabelRepo.save(postItLabel);
 		return getAllPostItLabelByUserIdAndUpdTime(userid);
 	}
+
+	@Transactional
+	public List<PostItLabelDto> updatePostItLabelAsDone(Long labelId, Long userId) {
+		PostItLabel postItLabel = postItLabelRepo.findByUser_UserIdAndLabelId(userId, labelId);
+		postItLabel.setDone(true);
+		postItLabelRepo.save(postItLabel);
+		return getAllPostItLabelByUserIdAndUpdTime(userId);
+	}
 }

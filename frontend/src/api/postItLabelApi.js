@@ -30,3 +30,16 @@ export const createPostItLabel = async(labelName, todoDate, done) => {
 
 	return response.json();
 }
+
+export const updatePostItLabel = async (lableId) => {
+	const response = await fetch(`${BASE_URL}/${lableId}`, {
+		method: "POST",
+		credentials: "include",
+		headers : {"Content-type" : "application/json"},
+	});
+	if(!response.ok) {
+		const errorData = await response.json();
+		throw errorData;
+	}
+	return response.json();
+}

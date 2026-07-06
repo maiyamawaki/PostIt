@@ -34,7 +34,10 @@ const HeaderComponent = () => {
 			<Link to={"/auth/register"}>Register</Link>
 			}
 			{isLogin &&
-			<Link to={`/postit/${labelId}`}>Home</Link>
+			<Link to={"/label"}>PostItLabel</Link>
+			}
+			{isLogin &&
+			<Link to={`/postit/${labelId}`}>PostIt</Link>
 			}
 			{isLogin &&
 			<Link to={`/postit/${labelId}/register`}>New PostIt</Link>

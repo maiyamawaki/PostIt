@@ -1,6 +1,7 @@
 package com.joy.backend.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,13 @@ public class PostItLabelController {
 		Long userId = getUserIdBySession(session);
 		return postItLabelService.createPostItLabel(postItLabelDto, userId);
 	}
+
+	@PostMapping("/{labelId}")
+	public List<PostItLabelDto> updatePostItAsDone(@Valid @PathVariable Long labelId, HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		return postItLabelService.updatePostItLabelAsDone(labelId, userId);
+	}
+
 
 	private Long getUserIdBySession(HttpSession session) {
 		Long userId = (Long)session.getAttribute("LOGIN_USERID");

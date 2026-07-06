@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {updatePostItLabel} from "../api/postItLabelApi"
 import { usePostItLabel } from "../hooks/usePostItLabel"; 
 import PostItLabelComponent from "../components/PostItLabelComponent";
 import { useCreatePostItLabel } from "../hooks/usePostItLabel";
@@ -25,6 +26,15 @@ const AllPostItLabelPage = () => {
 		}
 	}
 
+	const handleUpdatePostItLabelAsDone =async(labelId) => {
+		try{
+			await updatePostItLabel(labelId);
+			refetch();
+		} catch(err) {
+			console.log(err);
+		}
+	}
+
 	return (
 		<div className="main">
 			<h1>postit label</h1>
@@ -45,7 +55,11 @@ const AllPostItLabelPage = () => {
 			</form>
 			<div className="postItLabelContainer">
 				{postItLabels.map((label) => {
-					return <PostItLabelComponent key={label.labelId} label={label}/>
+					return <PostItLabelComponent 
+						key={label.labelId} 
+						label={label}
+						onDone={()=>handleUpdatePostItLabelAsDone(label.labelId)}
+						/>
 				})}
 			</div>
 		</div>
