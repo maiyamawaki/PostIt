@@ -3,6 +3,7 @@ import {updatePostItLabel} from "../api/postItLabelApi"
 import { usePostItLabel } from "../hooks/usePostItLabel"; 
 import PostItLabelComponent from "../components/PostItLabelComponent";
 import { useCreatePostItLabel } from "../hooks/usePostItLabel";
+import HeaderComponent from "../components/HeaderComponent"
 
 const AllPostItLabelPage = () => {
 	const {postItLabels, refetch} = usePostItLabel();
@@ -37,6 +38,7 @@ const AllPostItLabelPage = () => {
 
 	return (
 		<div className="main">
+			<HeaderComponent />
 			<h1>postit label</h1>
 			<form onSubmit={handleRegisterSubmit}>
 				{error.labelName && <p>{error.labelName}</p>}
