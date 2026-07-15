@@ -43,3 +43,16 @@ export const updatePostItLabel = async (lableId) => {
 	}
 	return response.json();
 }
+
+export const deletePostIt = async (labelId) => {
+	const response = await fetch(`${BASE_URL}/${labelId}`, {
+		method : "DELETE",
+		credentials : "include",
+		headers : {"Content-type" : "application/json"},	
+	});
+	if(!response.ok) {
+		const errorData = await response.json();
+		return errorData;
+	}
+	return response.json();
+}

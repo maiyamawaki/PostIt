@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {updatePostItLabel} from "../api/postItLabelApi"
+import { updatePostItLabel, deletePostIt } from "../api/postItLabelApi"
 import { usePostItLabel } from "../hooks/usePostItLabel"; 
 import PostItLabelComponent from "../components/PostItLabelComponent";
 import { useCreatePostItLabel } from "../hooks/usePostItLabel";
@@ -36,6 +36,15 @@ const AllPostItLabelPage = () => {
 		}
 	}
 
+	const handleDelete = async(labelId) => {
+		try{
+			await deletePostIt(labelId);
+			refetch();
+		} catch(err) {
+			console.log(err);
+		}
+	}
+
 	return (
 		<div className="main">
 			<HeaderComponent />
@@ -61,6 +70,7 @@ const AllPostItLabelPage = () => {
 						key={label.labelId} 
 						label={label}
 						onDone={()=>handleUpdatePostItLabelAsDone(label.labelId)}
+						onDelete={()=>handleDelete(label.labelId)}
 						/>
 				})}
 			</div>
