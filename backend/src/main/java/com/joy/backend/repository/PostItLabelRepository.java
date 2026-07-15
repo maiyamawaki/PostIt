@@ -11,5 +11,6 @@ public interface PostItLabelRepository extends JpaRepository<PostItLabel, Long> 
 	public PostItLabel findByUser_UserIdAndLabelId(Long userId, Long labelId);
 
 	public List<PostItLabel> findAllByUser_UserIdOrderByUpdTimeDesc(Long userId);
-			
+	
+	public void deleteByUser_UserIdAndLabelId(Long userId, Long labelId);
 }

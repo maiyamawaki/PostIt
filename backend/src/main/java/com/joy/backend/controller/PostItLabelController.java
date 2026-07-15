@@ -1,5 +1,6 @@
 package com.joy.backend.controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,6 +44,11 @@ public class PostItLabelController {
 		return postItLabelService.updatePostItLabelAsDone(labelId, userId);
 	}
 
+	@DeleteMapping("/{labelId}")
+	public List<PostItLabelDto> deletePostItLabel(@Valid @PathVariable Long labelId, HttpSession session) {
+		Long userId = getUserIdBySession(session);
+		return postItLabelService.deletePostItLabel(labelId, userId);
+	}
 
 	private Long getUserIdBySession(HttpSession session) {
 		Long userId = (Long)session.getAttribute("LOGIN_USERID");

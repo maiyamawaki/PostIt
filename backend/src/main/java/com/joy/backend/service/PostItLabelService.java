@@ -60,4 +60,10 @@ public class PostItLabelService {
 		postItLabelRepo.save(postItLabel);
 		return getAllPostItLabelByUserIdAndUpdTime(userId);
 	}
+
+	@Transactional
+	public List<PostItLabelDto> deletePostItLabel(Long labelId, Long userId) {
+		postItLabelRepo.deleteByUser_UserIdAndLabelId(userId, labelId);
+		return getAllPostItLabelByUserIdAndUpdTime(userId);
+	}
 }
